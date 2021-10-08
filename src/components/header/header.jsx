@@ -5,11 +5,9 @@ function Header() {
     <header className="header">
       <div className="header__wrapper container">
         <a className="header__logo link" href="/" aria-label="Лига Банк">
-          <svg className="header__logo-image" viewBox="0 0 30 27" width={28} height={25}>
+          <svg className="header__logo-image header__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
             <use xlinkHref="#logo" />
           </svg>
-
-          ЛИГА Банк
         </a>
 
         <nav className="header__nav nav">
@@ -21,13 +19,10 @@ function Header() {
               <a className="header__link link" href="/">Рассчитать кредит</a>
             </li>
             <li className="header__item">
-              <a className="header__link link header__link--active" href="/">Конвертер валют</a>
+              <a className="header__link link" href="/">Конвертер валют</a>
             </li>
             <li className="header__item">
               <a className="header__link link" href="/">Контакты</a>
-            </li>
-            <li className="header__item">
-              <a className="header__link link" href="/">Задать вопрос</a>
             </li>
           </ul>
 

@@ -6,11 +6,9 @@ function Footer() {
       <div className="footer__wrapper container">
         <div className="footer__logo-wrapper">
           <a className="footer__logo link" href="/" aria-label="Лига Банк">
-            <svg className="footer__logo-image" viewBox="0 0 30 27" width={28} height={25}>
+            <svg className="footer__logo-image footer__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
               <use xlinkHref="#logo" />
             </svg>
-
-            ЛИГА Банк
           </a>
 
           <p className="footer__address">
