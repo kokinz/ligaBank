@@ -1,0 +1,123 @@
+.footer {
+  background: #F6F7FF;
+}
+
+.footer__wrapper {
+  display: flex;
+
+  min-height: 224px;
+}
+
+.footer__logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 56px;
+  width: 148px;
+
+  color: #1F1E25;
+  font-family: 'WorkSans', 'Tahoma', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.footer__logo-image {
+  margin-top: -12px;
+}
+
+.footer__address {
+  margin-top: 13px;
+  width: 252px;
+  margin-bottom: 0;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #707C87;
+}
+
+.footer__license {
+  margin-top: 0;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #707C87;
+}
+
+.footer__nav {
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.footer__list {
+  margin: 0;
+  padding: 0;
+  padding-left: 81px;
+  padding-top: 55px;
+  list-style: none;
+}
+
+.footer__item {
+  width: 200px;
+  margin-bottom: 9px;
+}
+
+.footer__contact-number {
+  padding-top: 58px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #707C87;
+
+  &--mobile {
+    margin-right: 62px;
+    padding-top: 59px;
+  }
+}
+
+.footer__phone-number {
+  display: inline-flex;
+  justify-content: space-between;
+  padding-left: 19px;
+  padding-top: 1px;
+  width: 148px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  vertical-align: top;
+
+  color: #1F1E25;
+
+  &--mobile {
+    padding-left: 24px;
+    padding-top: 1px;
+    width: 73px;
+  }
+}
+
+.footer__phone-description {
+  margin-top: 0;
+  padding-left: 52px;
+  width: 167px;
+}
+
+.footer__social {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  margin-top: 60px;
+  margin-left: 35px;
+  width: 102px;
+  height: 16px;
+
+  list-style: none;
+}
