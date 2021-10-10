@@ -1,0 +1,109 @@
+.promo {
+  position: relative;
+}
+
+.slider__item {
+  min-height: 400px;
+
+  &--credit {
+    background:
+    url('../../img/cards.png') top 61px right 224px/444px 286px no-repeat,
+    linear-gradient(180.24deg, rgba(32, 39, 179, 0) 36.31%, #2027B3 99.79%) bottom left/150px 400px no-repeat,
+    linear-gradient(183.47deg, rgba(56, 65, 255, 0) 66.3%, #3841FF 97.14%) bottom left 150px/150px 400px no-repeat,
+    linear-gradient(183.47deg, rgba(56, 65, 255, 0) 27.26%, #3841FF 97.14%) bottom left 797px/270px 269px no-repeat,
+    linear-gradient(180.24deg, rgba(32, 39, 179, 0) 32.89%, #2027B3 99.79%) bottom left 1067px/298px 400px no-repeat,
+    linear-gradient(#2C36F2, #2C36F2) top left/1366px 400px no-repeat;
+  }
+
+  &--confidence {
+    background: url('../../img/confidence.png') top left 100% no-repeat;
+  }
+
+  &--branch {
+    background: url('../../img/branch.png') top left 100% no-repeat;
+  }
+}
+
+.promo__header {
+  margin: 0;
+  padding-top: 102px;
+  padding-left: 170px;
+
+  font-weight: 700;
+  font-size: 54px;
+  line-height: 63px;
+
+  color: #F6F7FF;
+
+  &--confidence {
+    color: #1F1E25;
+  }
+
+  &--branch {
+    color: #1F1E25;
+  }
+}
+
+.promo__description {
+  margin: 0;
+  padding-top: 8px;
+  padding-left: 170px;
+
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+  color: #E0E1EA;
+
+  &--confidence {
+    color: #2B3C4F;
+  }
+
+  &--branch {
+    color: #2B3C4F;
+  }
+}
+
+.promo__link {
+  min-width: 234px;
+  min-height: 53px;
+  margin-top: 34px;
+  margin-left: 170px;
+
+  color: #1F1E25;
+
+  &--branch {
+    min-width: 243px;
+
+    color: #F6F7FF;
+    background-color: #2C36F2;
+  }
+}
+
+.promo__slider-controls {
+  position: absolute;
+
+  display: flex;
+  justify-content: space-between;
+
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  width: 40px;
+  height: 8px;
+}
+
+.promo__slider-control {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background-color: #2028B6;
+
+  cursor: pointer;
+
+  &--active {
+    background-color: #F6F7FF;
+  }
+}
