@@ -1,6 +1,7 @@
 import React from 'react';
 import Promo from '../promo/promo';
 import Tabs from '../tabs/tabs';
+import Calculator from '../calculator/calculator';
 
 function Main() {
   return(
@@ -10,6 +11,8 @@ function Main() {
       <Promo />
 
       <Tabs />
+
+      <Calculator />
     </main>
   );
 }

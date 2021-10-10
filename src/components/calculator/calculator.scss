@@ -1,0 +1,146 @@
+.calculator__header {
+  margin-top: 96px;
+
+  font-weight: 800;
+  font-size: 41px;
+  line-height: 57px;
+
+  color: #1F1E25;
+}
+
+.calculator__fieldset {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  padding-top: 68px;
+
+  border: none;
+}
+
+.calculator__legend {
+  position: absolute;
+
+  top: 15px;
+  padding: 0;
+
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 31px;
+
+  color: #1F1E25;
+}
+
+.calculator__details {
+  position: relative;
+
+  box-sizing: border-box;
+  width: 600px;
+  height: 60px;
+
+	border: 1px solid #1F1E25;
+  border-radius: 4px;
+
+  &::after {
+    position: absolute;
+
+    content: '';
+
+    display: block;
+    width: 10px;
+    height: 10px;
+    top: 20px;
+    right: 25px;
+
+    border-bottom: 2px solid #1F1E25;
+    border-left: 2px solid #1F1E25;
+    transform: rotate(315deg) translate(0%, 0%);
+    transition: transform ease-in-out 100ms;
+  }
+
+  &[open] {
+    z-index: 1;
+    border-radius: 4px 4px 0 0;
+  }
+
+  &[open]::after {
+    top: 18px;
+    transform: rotate(135deg) translate(50%, -50%);
+  }
+}
+
+.calculator__summary {
+  width: 600px;
+  height: 60px;
+  padding-left: 18px;
+  padding-top: 19px;
+
+	cursor: pointer;
+  list-style: none;
+  background-color: transparent;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.calculator__option-input {
+  font-family: 'Roboto', 'Tahoma', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+	counter-increment: radios;
+	appearance: none;
+	display: none;
+
+  &:checked {
+    font-weight: 500;
+    display: inline;
+  }
+
+  &:after {
+    content: attr(title);
+    display: inline;
+  }
+}
+
+.calculator__options {
+	position: absolute;
+
+	box-sizing: border-box;
+  width: 100%;
+	top: 59px;
+  left: -1px;
+	margin: 0;
+
+  counter-reset: labels;
+}
+
+
+.calculator__option {
+  box-sizing: border-box;
+	margin: 0;
+  padding: 0;
+  padding-left: 23px;
+  padding-top: 20px;
+	width: 600px;
+  height: 60px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #1F1E25;
+
+  border-left: 1px solid #1F1E25;
+  border-right: 1px solid #1F1E25;
+  border-bottom: 1px solid #C1C2CA;
+  appearance: none;
+
+  &:last-child {
+    padding-bottom: 0;
+
+    border-radius: 0 0 4px 4px;
+    border-bottom: 1px solid #1F1E25;
+  }
+}
