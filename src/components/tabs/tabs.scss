@@ -1,0 +1,182 @@
+.tabs {
+  margin-top: 60px;
+}
+
+.tabs__list {
+  display: flex;
+}
+
+.tabs__link {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+
+  width: 292.5px;
+  height: 93px;
+  padding-top: 37px;
+
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #4C4B51;
+
+  border: none;
+
+  &:hover {
+    color: #1F1E25;
+    background-color: #F6F7FF;
+
+    border-radius: 4px 4px 0px 0px;
+    opacity: 1;
+  }
+
+  &--active {
+    color: #1F1E25;
+    background-color: #F6F7FF;
+
+    border-radius: 4px 4px 0px 0px;
+  }
+}
+
+.tabs__icon {
+  width: 34px;
+  margin-right: 10px;
+  margin-top: -7px;
+
+  opacity: 0.8;
+
+  &--active {
+    opacity: 1;
+  }
+}
+
+.tabs__icon-security {
+  width: 28px;
+}
+
+.tabs__icon-mobile {
+  width: 20px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  padding-top: 53px;
+  padding-left: 70px;
+
+  border-radius: 0px 4px 4px 4px;
+  background-color: #F6F7FF;
+
+  &--contributions {
+    background-image: url(../../img/piggybank.png);
+    background-repeat: no-repeat;
+    background-position: right 135px bottom 60px;
+  }
+
+  &--credits {
+    background-image: url(../../img/car.png);
+    background-repeat: no-repeat;
+    background-position: right 135px bottom 54px;
+  }
+
+  &--insurance {
+    background-image: url(../../img/lock.png);
+    background-repeat: no-repeat;
+    background-position: right 135px bottom 49px;
+  }
+
+  &--online-services {
+    background-image: url(../../img/mobile.png);
+    background-repeat: no-repeat;
+    background-position: right 135px bottom 52px;
+  }
+}
+
+.tab__header  {
+  width: 410px;
+  margin: 0;
+  margin-bottom: 28px;
+
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 31px;
+
+  color: #1F1E25;
+
+  &--insurance {
+    width: 375px;
+  }
+
+  &--credits {
+    width: 290px;
+  }
+}
+
+.tab__list {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+
+  color: #1F1E25;
+}
+
+.tab__item {
+  display: flex;
+  margin-bottom: 15px;
+
+  background-color: transparent;
+}
+
+.tab__icon {
+  width: 13px;
+  height: 10px;
+
+  margin-top: 5px;
+  margin-left: -1px;
+  margin-right: 9px;
+}
+
+.tab__text {
+  width: 400px;
+  margin: 0;
+
+  &--online-services {
+    width: 340px;
+  }
+}
+
+.tab__button {
+  width: 198px;
+  margin-top: 19px;
+  margin-left: 0px;
+  margin-bottom: 60px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #F6F7FF;
+  background-color: #2C36F2;
+}
+
+.tab__description {
+  width: 400px;
+  margin-top: 14px;
+  margin-bottom: 53px;
+
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+
+  color: #1F1E25;
+}
+
+.tabs__description-link {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  text-decoration-line: underline;
+
+  color: #1F1E25;
+}
