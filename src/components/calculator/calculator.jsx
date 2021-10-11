@@ -1,7 +1,7 @@
-import React, {useState, useRef} from 'react';
+import React, { useRef} from 'react';
 
 function Calculator() {
-  const [creditTarget, setCreditTarget] = useState('');
+  // const [creditTarget, setCreditTarget] = useState('');
 
   const details = useRef();
 
@@ -12,7 +12,7 @@ function Calculator() {
     }
 
     details.current.open = false;
-    setCreditTarget(evt.target.title);
+    // setCreditTarget(evt.target.title);
   };
 
   return(

@@ -34,6 +34,7 @@
   position: relative;
 
   box-sizing: border-box;
+  margin-bottom: 62px;
   width: 600px;
   height: 60px;
 
@@ -58,6 +59,7 @@
   }
 
   &[open] {
+    margin-bottom: 182px;
     z-index: 1;
     border-radius: 4px 4px 0 0;
   }

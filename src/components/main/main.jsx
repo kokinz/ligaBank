@@ -2,6 +2,7 @@ import React from 'react';
 import Promo from '../promo/promo';
 import Tabs from '../tabs/tabs';
 import Calculator from '../calculator/calculator';
+import Map from '../map/map';
 
 function Main() {
   return(
@@ -13,6 +14,8 @@ function Main() {
       <Tabs />
 
       <Calculator />
+
+      <Map />
     </main>
   );
 }
