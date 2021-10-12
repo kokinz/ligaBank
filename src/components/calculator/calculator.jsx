@@ -1,7 +1,10 @@
 import React, {useState, useRef} from 'react';
 
 function Calculator() {
-  const [creditTarget, setCreditTarget] = useState('');
+  const [data, setData] = useState({
+    creditTarget: '',
+    propertyValue: '2 000 000',
+  });
 
   const details = useRef();
   const propertyValue = useRef();
@@ -12,13 +15,18 @@ function Calculator() {
       return;
     }
 
+    setData({
+      ...data,
+      creditTarget: evt.target.title,
+    });
+
     details.current.open = false;
-    setCreditTarget(evt.target.title);
   };
 
   const handlePropertyValueType = (evt) => {
     const number = parseInt(evt.target.value.replace(/[^0-9]/g, ''), 10) || '';
     const chars = [...number.toString()];
+    const cursorPosition = evt.target.selectionStart;
 
     if (chars.length !== 0) {
       const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
@@ -29,12 +37,22 @@ function Calculator() {
 
       const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
 
-      propertyValue.current.value = result;
+      setData({
+        ...data,
+        propertyValue: result,
+      });
+
+      propertyValue.current.selectionStart = propertyValue.current.selectionEnd = cursorPosition;
 
       return;
     }
 
-    propertyValue.current.value = 0;
+    setData({
+      ...data,
+      propertyValue: '0',
+    });
+
+    propertyValue.current.selectionStart = propertyValue.current.selectionEnd = 0;
   };
 
   return(
@@ -65,7 +83,7 @@ function Calculator() {
             </ul>
           </details>
         </fieldset>
-        {creditTarget ?
+        {data.creditTarget ?
           <>
             <fieldset className="calculator__fieldset calculator__fieldset--second-step">
               <legend className="calculator__legend calculator__legend">Шаг 2. Введите параметры кредита</legend>
@@ -74,28 +92,36 @@ function Calculator() {
               <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
                 <button className="calculator__button-minus" type="button">Минус</button>
 
-                <input className="calculator__input calculator__input" ref={propertyValue} type="text" id="propertyValue" defaultValue={'2 000 000'} onChange={handlePropertyValueType}/>
+                <input className="calculator__input" ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000" value={data.propertyValue} onChange={handlePropertyValueType} />
+
+                <label className="calculator__input-text" htmlFor="propertyValue"> рублей</label>
 
                 <button className="calculator__button-plus" type="button">Плюс</button>
               </div>
-              <p className="calculator__prompt">От 1 200 000  до 25 000 000 рублей</p>
+              <p className="calculator__prompt">От 1 200 000 &nbsp;до 25 000 000 рублей</p>
 
               <label className="calculator__label" htmlFor="initialFee">Первоначальный взнос</label>
-              <div className="calculator__input-wrapper">
-                <input className="calculator__input calculator__input" type="text" id="initialFee" defaultValue={200000} />
+              <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
+                <input className="calculator__input" type="text" id="initialFee" defaultValue="200 000" />
 
-                <input type="range" />
+                <label className="calculator__input-text calculator__input-text--initial-fee" htmlFor="propertyValue"> рублей</label>
               </div>
+
+              <input className="calculator__range" id="initialFeeRange" type="range" min="10" max="100" defaultValue="10" />
+              <label htmlFor="initialFeeRange" className="calculator__range-text">10%</label>
 
               <label className="calculator__label" htmlFor="loanTerms">Срок кредитования</label>
               <div className="calculator__input-wrapper">
-                <input className="calculator__input calculator__input" type="number" id="loanTerms" defaultValue={5} />
+                <input className="calculator__input calculator__input--loan-terms" type="text" id="loanTerms" defaultValue="5" />
 
-                <input type="range" />
+                <label className="calculator__input-text calculator__input-text--loan-terms" htmlFor="loanTerms"> лет</label>
               </div>
 
-              <input type="checkbox" id="maternityCapital" />
-              <label className="calculator__label" htmlFor="maternityCapital">Использовать материнский капитал</label>
+              <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" type="range" min="5" max="30" defaultValue="5" />
+              <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
+
+              <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" defaultChecked />
+              <label className="calculator__label calculator__label--checkbox" htmlFor="maternityCapital">Использовать материнский капитал</label>
             </fieldset>
 
             <div className="calculator__offer offer">
