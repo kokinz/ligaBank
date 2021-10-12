@@ -8,17 +8,25 @@
   color: #1F1E25;
 }
 
+.calculator__form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .calculator__fieldset {
   position: relative;
   margin: 0;
   padding: 0;
   padding-top: 68px;
+  width: 600px;
 
   border: none;
 
   &--second-step {
-    margin-top: 18px;
+    margin-top: -53px;
     padding-top: 42px;
+    margin-bottom: 59px;
   }
 }
 
@@ -41,6 +49,7 @@
   box-sizing: border-box;
   width: 600px;
   height: 60px;
+  margin-bottom: 71px;
 
 	border: 1px solid #1F1E25;
   border-radius: 4px;
@@ -63,7 +72,7 @@
   }
 
   &[open] {
-    margin-bottom: 119px;
+    margin-bottom: 191px;
     z-index: 1;
     border-radius: 4px 4px 0 0;
   }
@@ -394,14 +403,23 @@
 }
 
 .calculator__range-text {
-  display: block;
+  display: inline-block;
+  margin: 0;
   margin-top: 6px;
+  margin-right: 516px;
+  width: 42px;
 
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
 
   color: #707C87;
+
+  cursor: pointer;
+
+  &--max {
+    margin-right: 0;
+  }
 }
 
 .calculator__checkbox:checked + .calculator__label--checkbox {
@@ -427,4 +445,80 @@
     </svg>');
     background-repeat: no-repeat;
   }
+}
+
+.calculator__offer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  margin-top: -177px;
+  padding-left: 58px;
+
+  width: 500px;
+  height: 389px;
+
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 31px;
+
+  color: #1F1E25;
+
+  background-color: #F6F7FF;
+  border-radius: 4px;
+}
+
+.offer__header {
+  box-sizing: border-box;
+
+  width: 500px;
+  height: 84px;
+  margin: 0;
+  padding-top: 53px;
+}
+
+.offer__wrapper {
+  width: 180px;
+  margin-right: 47px;
+  margin-bottom: 2px;
+
+  &:nth-child(2n + 1) {
+    margin-right: 0;
+  }
+}
+
+.offer__number {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding-top: 24px;
+}
+
+.offer__text {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding-top: 2px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #394959;
+}
+
+.offer__button {
+  margin-top: 32px;
+  width: 382px;
+  height: 51px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #F6F7FF;
+
+  background-color: #2C36F2;
+  border-radius: 4px;
 }

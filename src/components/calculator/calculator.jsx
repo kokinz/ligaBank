@@ -119,6 +119,7 @@ function Calculator() {
 
               <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" type="range" min="5" max="30" defaultValue="5" />
               <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
+              <label htmlFor="loanTermsRange" className="calculator__range-text calculator__range-text--max">30 лет</label>
 
               <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" defaultChecked />
               <label className="calculator__label calculator__label--checkbox" htmlFor="maternityCapital">Использовать материнский капитал</label>
@@ -127,22 +128,22 @@ function Calculator() {
             <div className="calculator__offer offer">
               <p className="offer__header">Наше предложение</p>
 
-              <div>
+              <div className="offer__wrapper">
                 <p className="offer__number">1 330 000 рублей </p>
                 <p className="offer__text">Сумма ипотеки </p>
               </div>
 
-              <div>
+              <div className="offer__wrapper">
                 <p className="offer__number">9,40% </p>
                 <p className="offer__text">Процентная ставка </p>
               </div>
 
-              <div>
+              <div className="offer__wrapper">
                 <p className="offer__number">27 868 рублей </p>
                 <p className="offer__text">Ежемесячный платеж </p>
               </div>
 
-              <div>
+              <div className="offer__wrapper">
                 <p className="offer__number">61 929 рублей </p>
                 <p className="offer__text">Необходимый доход </p>
               </div>
