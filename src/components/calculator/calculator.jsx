@@ -3,8 +3,10 @@ import React, {useState, useRef} from 'react';
 function Calculator() {
   const [data, setData] = useState({
     creditTarget: '',
-    propertyValue: '2 000 000',
+    propertyValue: '2 000 000 рублей',
   });
+
+  const [formShown, setFormShown] = useState(false);
 
   const details = useRef();
   const propertyValue = useRef();
@@ -55,6 +57,12 @@ function Calculator() {
     propertyValue.current.selectionStart = propertyValue.current.selectionEnd = 0;
   };
 
+  const handleMakeRequestClick = (evt) => {
+    evt.preventDefault();
+
+    setFormShown(true);
+  };
+
   return(
     <section className="calculator container">
       <h2 className="calculator__header">Кредитный калькулятор</h2>
@@ -65,11 +73,11 @@ function Calculator() {
 
           <details className="calculator__selector selector" ref={details}>
             <summary className="selector__summary">
-              <input className="selector__option-input" type="radio" name="item" id="default" title="Выберите цель кредита" defaultChecked />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" defaultChecked />
 
-              <input className="selector__option-input" type="radio" name="item" id="item1" title="Ипотечное кредитование" onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" title="Ипотечное кредитование" onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="item" id="item2" title="Автомобильное кредитование" onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" title="Автомобильное кредитование" onClick={handleSelectorClick} />
             </summary>
 
             <ul className="selector__options list">
@@ -90,32 +98,22 @@ function Calculator() {
 
               <label className="calculator__label" htmlFor="propertyValue">Стоимость недвижимости</label>
               <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
-                <button className="calculator__button-minus" type="button">Минус</button>
+                <button className="calculator__button-minus button" type="button">Минус</button>
 
-                <input className="calculator__input" ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000" value={data.propertyValue} onChange={handlePropertyValueType} />
+                <input className="calculator__input" ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" value={data.propertyValue} onChange={handlePropertyValueType} />
 
-                <label className="calculator__input-text" htmlFor="propertyValue"> рублей</label>
-
-                <button className="calculator__button-plus" type="button">Плюс</button>
+                <button className="calculator__button-plus button" type="button">Плюс</button>
               </div>
               <p className="calculator__prompt">От 1 200 000 &nbsp;до 25 000 000 рублей</p>
 
               <label className="calculator__label" htmlFor="initialFee">Первоначальный взнос</label>
-              <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
-                <input className="calculator__input" type="text" id="initialFee" defaultValue="200 000" />
-
-                <label className="calculator__input-text calculator__input-text--initial-fee" htmlFor="propertyValue"> рублей</label>
-              </div>
+              <input className="calculator__input" type="text" id="initialFee" defaultValue="200 000 рублей" />
 
               <input className="calculator__range" id="initialFeeRange" type="range" min="10" max="100" defaultValue="10" />
               <label htmlFor="initialFeeRange" className="calculator__range-text">10%</label>
 
               <label className="calculator__label" htmlFor="loanTerms">Срок кредитования</label>
-              <div className="calculator__input-wrapper">
-                <input className="calculator__input calculator__input--loan-terms" type="text" id="loanTerms" defaultValue="5" />
-
-                <label className="calculator__input-text calculator__input-text--loan-terms" htmlFor="loanTerms"> лет</label>
-              </div>
+              <input className="calculator__input calculator__input--loan-terms" type="text" id="loanTerms" defaultValue="5 лет" />
 
               <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" type="range" min="5" max="30" defaultValue="5" />
               <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
@@ -148,9 +146,51 @@ function Calculator() {
                 <p className="offer__text">Необходимый доход </p>
               </div>
 
-              <button className="offer__button button">Оформить заявку</button>
+              <button className="offer__button button" type="button" onClick={handleMakeRequestClick}>Оформить заявку</button>
             </div>
           </>
+          : ''}
+
+        {formShown ?
+          <fieldset className="calculator__fieldset calculator__fieldset--third-step">
+            <legend className="calculator__legend calculator__legend--third-step">Шаг 3. Оформление заявки</legend>
+
+            <ul className="calculator__data-list list">
+              <li className="calculator__data-item">
+                <span className="calculator__data-header">Номер заявки</span>
+
+                <span className="calculator__data-value">№ 0010</span>
+              </li>
+              <li className="calculator__data-item">
+                <span className="calculator__data-header">Цель кредита</span>
+
+                <span className="calculator__data-value">Ипотека</span>
+              </li>
+              <li className="calculator__data-item">
+                <span className="calculator__data-header">Стоимость недвижимости</span>
+
+                <span className="calculator__data-value">2 000 000 рублей</span>
+              </li>
+              <li className="calculator__data-item">
+                <span className="calculator__data-header">Первоначальный взнос</span>
+
+                <span className="calculator__data-value">200 000 рублей</span>
+              </li>
+              <li className="calculator__data-item">
+                <span className="calculator__data-header">Срок кредитования</span>
+
+                <span className="calculator__data-value">5 лет</span>
+              </li>
+            </ul>
+
+            <input className="calculator__input calculator__input--full-name" type="text" placeholder="ФИО" autoFocus />
+
+            <input className="calculator__input calculator__input--user-phone" type="text" placeholder="Телефон" />
+
+            <input className="calculator__input calculator__input--user-email" type="text" placeholder="E-mail" />
+
+            <button className="calculator__submit button" type="submit">Отправить</button>
+          </fieldset>
           : ''}
       </form>
     </section>
