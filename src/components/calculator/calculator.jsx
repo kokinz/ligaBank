@@ -63,6 +63,54 @@ function Calculator() {
     propertyValue.current.selectionStart = propertyValue.current.selectionEnd = cursorPosition;
   };
 
+  const handlePropertyValueMinus = () => {
+    const number = parseInt(propertyValue.current.value.replace(/[^0-9]/g, ''), 10) - 100000;
+    const chars = [...number.toString()];
+
+    if (number < 1200000) {
+      return;
+    }
+
+    const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
+      const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
+
+      return spaceOrNothing + char + acc;
+    });
+
+    const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
+
+    setData({
+      ...data,
+      propertyValue: `${result} рублей`,
+    });
+
+    propertyValue.current.value = `${result} рублей`;
+  };
+
+  const handlePropertyValuePlus = () => {
+    const number = parseInt(propertyValue.current.value.replace(/[^0-9]/g, ''), 10) + 100000;
+    const chars = [...number.toString()];
+
+    if (number > 25000000) {
+      return;
+    }
+
+    const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
+      const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
+
+      return spaceOrNothing + char + acc;
+    });
+
+    const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
+
+    setData({
+      ...data,
+      propertyValue: `${result} рублей`,
+    });
+
+    propertyValue.current.value = `${result} рублей`;
+  };
+
   const handleInitialFeeType = (evt) => {
     const number = parseInt(evt.target.value.replace(/[^0-9]/g, ''), 10) || '';
     const chars = [...number.toString()];
@@ -164,11 +212,11 @@ function Calculator() {
 
               <label className="calculator__label" htmlFor="propertyValue">Стоимость недвижимости</label>
               <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
-                <button className="calculator__button-minus button" type="button">Минус</button>
+                <button className="calculator__button-minus button" type="button" onClick={handlePropertyValueMinus}>Минус</button>
 
                 <input className="calculator__input" ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" onChange={handlePropertyValueType} />
 
-                <button className="calculator__button-plus button" type="button">Плюс</button>
+                <button className="calculator__button-plus button" type="button" onClick={handlePropertyValuePlus}>Плюс</button>
               </div>
               <p className="calculator__prompt">От 1 200 000 &nbsp;до 25 000 000 рублей</p>
 
