@@ -3,17 +3,39 @@ import React, {useState, useRef} from 'react';
 function Calculator() {
   const [data, setData] = useState({
     creditTarget: '',
-    propertyValue: '2 000 000 рублей',
-    initialFee: '2 000 000 рублей',
+    propertyValue: 2000000,
+    initialFee: 200000,
     loanTerms: '5 лет',
   });
 
+  const [inputError, setInputError] = useState(false);
   const [formShown, setFormShown] = useState(false);
 
   const details = useRef();
   const propertyValue = useRef();
   const initialFee = useRef();
+  const initialFeeRange = useRef();
   const loanTerms = useRef();
+
+  const getNumberFromString = (str) => parseInt(str.replace(/[^0-9]/g, ''), 10) || '';
+
+  const getNumberWithSpaces = (number) => {
+    const chars = [...number.toString()];
+
+    if (chars.length !== 0) {
+      const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
+        const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
+
+        return spaceOrNothing + char + acc;
+      });
+
+      const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
+
+      return result;
+    }
+
+    return '0';
+  };
 
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
@@ -30,107 +52,87 @@ function Calculator() {
   };
 
   const handlePropertyValueType = (evt) => {
-    const number = parseInt(evt.target.value.replace(/[^0-9]/g, ''), 10) || '';
-    const chars = [...number.toString()];
+    const number = getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
 
-    if (chars.length !== 0) {
-      const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
-        const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
-
-        return spaceOrNothing + char + acc;
-      });
-
-      const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
-
-      setData({
-        ...data,
-        propertyValue: `${result} рублей`,
-      });
-
-      propertyValue.current.value = `${result} рублей`;
-      propertyValue.current.selectionStart = propertyValue.current.selectionEnd = cursorPosition;
-
-      return;
+    if (number < 1200000 || number > 25000000) {
+      setInputError(true);
+    } else {
+      setInputError(false);
     }
 
     setData({
       ...data,
-      propertyValue: '0 рублей',
+      propertyValue: number,
+      initialFee: number * 0.1,
     });
 
-    propertyValue.current.value = '0 рублей';
+    propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
+    initialFee.current.value = `${getNumberWithSpaces(number * 0.1)} рублей`;
+    initialFeeRange.current.value = 10;
     propertyValue.current.selectionStart = propertyValue.current.selectionEnd = cursorPosition;
   };
 
   const handlePropertyValueMinus = () => {
-    const number = parseInt(propertyValue.current.value.replace(/[^0-9]/g, ''), 10) - 100000;
-    const chars = [...number.toString()];
+    const number = getNumberFromString(propertyValue.current.value) - 100000;
 
     if (number < 1200000) {
       return;
     }
 
-    const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
-      const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
-
-      return spaceOrNothing + char + acc;
-    });
-
-    const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
+    if (number < 1200000 || number > 25000000) {
+      setInputError(true);
+    } else {
+      setInputError(false);
+    }
 
     setData({
       ...data,
-      propertyValue: `${result} рублей`,
+      propertyValue: number,
+      initialFee: number * 0.1,
     });
 
-    propertyValue.current.value = `${result} рублей`;
+    propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
+    initialFee.current.value = `${getNumberWithSpaces(number * 0.1)} рублей`;
+    initialFeeRange.current.value = 10;
   };
 
   const handlePropertyValuePlus = () => {
-    const number = parseInt(propertyValue.current.value.replace(/[^0-9]/g, ''), 10) + 100000;
-    const chars = [...number.toString()];
+    const number = getNumberFromString(propertyValue.current.value) + 100000;
 
     if (number > 25000000) {
       return;
     }
 
-    const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
-      const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
-
-      return spaceOrNothing + char + acc;
-    });
-
-    const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
+    if (number < 1200000 || number > 25000000) {
+      setInputError(true);
+    } else {
+      setInputError(false);
+    }
 
     setData({
       ...data,
-      propertyValue: `${result} рублей`,
+      propertyValue: number,
+      initialFee: number * 0.1,
     });
 
-    propertyValue.current.value = `${result} рублей`;
+    propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
+    initialFee.current.value = `${getNumberWithSpaces(number * 0.1)} рублей`;
+    initialFeeRange.current.value = 10;
   };
 
   const handleInitialFeeType = (evt) => {
-    const number = parseInt(evt.target.value.replace(/[^0-9]/g, ''), 10) || '';
-    const chars = [...number.toString()];
+    const number = getNumberFromString(evt.target.value) > data.propertyValue ? data.propertyValue : getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
 
-    if (chars.length !== 0) {
-      const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
-        const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
-
-        return spaceOrNothing + char + acc;
-      });
-
-      const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
-
+    if (number < data.propertyValue * 0.10) {
       setData({
         ...data,
-        initialFee: `${result} рублей`,
+        initialFee: data.propertyValue * 0.10,
       });
 
-      initialFee.current.value = `${result} рублей`;
+      initialFee.current.value = `${getNumberWithSpaces(data.propertyValue * 0.10)} рублей`;
+      initialFeeRange.current.value = 10;
       initialFee.current.selectionStart = initialFee.current.selectionEnd = cursorPosition;
 
       return;
@@ -138,25 +140,44 @@ function Calculator() {
 
     setData({
       ...data,
-      initialFee: '0 рублей',
+      initialFee: number,
     });
 
-    initialFee.current.value = '0 рублей';
+    initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
+    console.log(number / data.propertyValue * 100);
+    initialFeeRange.current.value = number / data.propertyValue * 100;
     initialFee.current.selectionStart = initialFee.current.selectionEnd = cursorPosition;
   };
 
+  const handleInitialFeeChange = (evt) => {
+    const number = data.propertyValue / 100 * getNumberFromString(evt.target.value);
+
+    initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
+  };
+
   const handleLoanTermsType = (evt) => {
-    const number = parseInt(evt.target.value.replace(/[^0-9]/g, ''), 10) || '';
-    const chars = [...number.toString()];
+    const number = getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
 
-    if (chars.length !== 0) {
+    if (number < 5) {
       setData({
         ...data,
-        loanTerms: `${number} лет`,
+        loanTerms: 5,
       });
 
-      loanTerms.current.value = `${number} лет`;
+      loanTerms.current.value = '5 лет';
+      loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
+
+      return;
+    }
+
+    if (number > 30) {
+      setData({
+        ...data,
+        loanTerms: 30,
+      });
+
+      loanTerms.current.value = '30 лет';
       loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
 
       return;
@@ -164,16 +185,15 @@ function Calculator() {
 
     setData({
       ...data,
-      loanTerms: '0 лет',
+      loanTerms: number,
     });
 
-    loanTerms.current.value = '0 лет';
+    loanTerms.current.value = `${getNumberWithSpaces(number)} лет`;
     loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
   };
 
   const handleMakeRequestClick = (evt) => {
     evt.preventDefault();
-
     setFormShown(true);
   };
 
@@ -214,7 +234,9 @@ function Calculator() {
               <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
                 <button className="calculator__button-minus button" type="button" onClick={handlePropertyValueMinus}>Минус</button>
 
-                <input className="calculator__input" ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" onChange={handlePropertyValueType} />
+                <input className={inputError ? 'calculator__input calculator__input--error' : 'calculator__input'} ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" onChange={handlePropertyValueType} />
+
+                {inputError ? <span className="calculator__error">Некорректное значение</span> : ''}
 
                 <button className="calculator__button-plus button" type="button" onClick={handlePropertyValuePlus}>Плюс</button>
               </div>
@@ -223,13 +245,13 @@ function Calculator() {
               <label className="calculator__label" htmlFor="initialFee">Первоначальный взнос</label>
               <input className="calculator__input" ref={initialFee} type="text" id="initialFee" defaultValue="200 000 рублей" onChange={handleInitialFeeType} />
 
-              <input className="calculator__range" id="initialFeeRange" type="range" min="10" max="100" defaultValue="10" />
+              <input className="calculator__range" id="initialFeeRange" ref={initialFeeRange} type="range" min="10" max="100" step="5" defaultValue="10" onChange={handleInitialFeeChange} />
               <label htmlFor="initialFeeRange" className="calculator__range-text">10%</label>
 
               <label className="calculator__label" htmlFor="loanTerms">Срок кредитования</label>
               <input className="calculator__input calculator__input--loan-terms" ref={loanTerms} type="text" id="loanTerms" defaultValue="5 лет" onChange={handleLoanTermsType} />
 
-              <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" type="range" min="5" max="30" defaultValue="5" />
+              <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" type="range" min="5" max="30" step="1" defaultValue="5" />
               <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
               <label htmlFor="loanTermsRange" className="calculator__range-text calculator__range-text--max">30 лет</label>
 

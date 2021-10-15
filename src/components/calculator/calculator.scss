@@ -282,6 +282,11 @@
   border-radius: 4px;
   cursor: pointer;
 
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba($color: #2C36F2, $alpha: 0.7);
+  }
+
   &--loan-terms {
     padding-top: 2px;
   }
@@ -329,6 +334,20 @@
   &--user-email {
     margin-right: 0;
   }
+
+  &--error {
+    border: 1px solid #EC1A1A;
+    background-color: rgba($color: #EC1A1A, $alpha: 0.05);
+    box-shadow: 0 0 10px rgba($color: #EC1A1A, $alpha: 0.5);
+  }
+}
+
+.calculator__error {
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+
+  color: #EC1A1A;
 }
 
 .calculator__input-text {
