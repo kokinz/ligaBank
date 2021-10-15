@@ -40,15 +40,6 @@ function Calculator() {
     return '0';
   };
 
-  const getCreditSum = () => {
-    console.log(data.propertyValue);
-
-    setData({
-      ...data,
-      sum: data.maternityCapital ? data.propertyValue - data.initialFee - 470000 : data.propertyValue - data.initialFee,
-    });
-  };
-
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
       details.current.open = true;
@@ -294,7 +285,7 @@ function Calculator() {
               <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
               <label htmlFor="loanTermsRange" className="calculator__range-text calculator__range-text--max">30 лет</label>
 
-              <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" checked={data.maternityCapital} onClick={handleMaternityCapitalClick}/>
+              <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" checked={data.maternityCapital} onChange={handleMaternityCapitalClick}/>
               <label className="calculator__label calculator__label--checkbox" htmlFor="maternityCapital">Использовать материнский капитал</label>
             </fieldset>
 
