@@ -1,6 +1,11 @@
 import React, {useState, useRef} from 'react';
 
 function Calculator() {
+  const MOUNTLY_INTEREST_RATE = {
+    low: 0.007083,
+    high: 0.00783,
+  };
+
   const [data, setData] = useState({
     creditTarget: '',
     propertyValue: 2000000,
@@ -8,6 +13,8 @@ function Calculator() {
     loanTerms: 5,
     maternityCapital: true,
     sum: 1330000,
+    interestRate: MOUNTLY_INTEREST_RATE.high,
+    monthlyPayment: 27868,
   });
 
   const [inputError, setInputError] = useState(false);
@@ -40,6 +47,14 @@ function Calculator() {
     return '0';
   };
 
+  const getMonthlyPayment = (sum, rate, years) => {
+    const periods = years * 12;
+
+    return parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10);
+
+    // console.log(parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10));
+  };
+
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
       details.current.open = true;
@@ -57,6 +72,7 @@ function Calculator() {
   const handlePropertyValueType = (evt) => {
     const number = getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
+    const sum = data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1);
 
     if (number < 1200000 || number > 25000000) {
       setInputError(true);
@@ -68,7 +84,9 @@ function Calculator() {
       ...data,
       propertyValue: number,
       initialFee: number * 0.1,
-      sum: data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1),
+      sum: sum,
+      interestRate: MOUNTLY_INTEREST_RATE.high,
+      monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -79,6 +97,7 @@ function Calculator() {
 
   const handlePropertyValueMinus = () => {
     const number = getNumberFromString(propertyValue.current.value) - 100000;
+    const sum = data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1);
 
     if (number < 1200000) {
       return;
@@ -94,7 +113,9 @@ function Calculator() {
       ...data,
       propertyValue: number,
       initialFee: number * 0.1,
-      sum: data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1),
+      sum: sum,
+      interestRate: MOUNTLY_INTEREST_RATE.high,
+      monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -104,6 +125,7 @@ function Calculator() {
 
   const handlePropertyValuePlus = () => {
     const number = getNumberFromString(propertyValue.current.value) + 100000;
+    const sum = data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1);
 
     if (number > 25000000) {
       return;
@@ -119,7 +141,9 @@ function Calculator() {
       ...data,
       propertyValue: number,
       initialFee: number * 0.1,
-      sum: data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1),
+      sum: sum,
+      interestRate: MOUNTLY_INTEREST_RATE.high,
+      monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -130,12 +154,17 @@ function Calculator() {
   const handleInitialFeeType = (evt) => {
     const number = getNumberFromString(evt.target.value) > data.propertyValue ? data.propertyValue : getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
+    let sum = 0;
 
     if (number < data.propertyValue * 0.1) {
+      sum = data.maternityCapital ? data.propertyValue - (data.propertyValue * 0.1) - 470000 : data.propertyValue - (data.propertyValue * 0.1);
+
       setData({
         ...data,
         initialFee: data.propertyValue * 0.1,
-        sum: data.maternityCapital ? data.propertyValue - (data.propertyValue * 0.1) - 470000 : data.propertyValue - (data.propertyValue * 0.1),
+        sum: sum,
+        interestRate: MOUNTLY_INTEREST_RATE.high,
+        monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
       });
 
       initialFee.current.value = `${getNumberWithSpaces(data.propertyValue * 0.10)} рублей`;
@@ -145,10 +174,14 @@ function Calculator() {
       return;
     }
 
+    sum = data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number;
+
     setData({
       ...data,
       initialFee: number,
       sum: data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number,
+      interestRate: number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.high : MOUNTLY_INTEREST_RATE.low,
+      monthlyPayment: getMonthlyPayment(sum, number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.high : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
     });
 
     initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -158,11 +191,14 @@ function Calculator() {
 
   const handleInitialFeeChange = (evt) => {
     const number = data.propertyValue / 100 * getNumberFromString(evt.target.value);
+    const sum = data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number;
 
     setData({
       ...data,
       initialFee: number,
-      sum: data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number,
+      sum: sum,
+      interestRate: number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.high : MOUNTLY_INTEREST_RATE.low,
+      monthlyPayment: getMonthlyPayment(sum, number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.high : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
     });
 
     initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -176,6 +212,7 @@ function Calculator() {
       setData({
         ...data,
         loanTerms: 5,
+        monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, 5),
       });
 
       loanTerms.current.value = '5 лет';
@@ -189,6 +226,7 @@ function Calculator() {
       setData({
         ...data,
         loanTerms: 30,
+        monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, 30),
       });
 
       loanTerms.current.value = '30 лет';
@@ -201,6 +239,7 @@ function Calculator() {
     setData({
       ...data,
       loanTerms: number,
+      monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, number),
     });
 
     loanTerms.current.value = `${getNumberWithSpaces(number)} лет`;
@@ -211,6 +250,12 @@ function Calculator() {
   const handleLoanTermsChange = (evt) => {
     const number = getNumberFromString(evt.target.value);
 
+    setData({
+      ...data,
+      loanTerms: number,
+      monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, number),
+    });
+
     loanTerms.current.value = `${number} лет`;
   };
 
@@ -219,6 +264,7 @@ function Calculator() {
       ...data,
       maternityCapital: !data.maternityCapital,
       sum: !data.maternityCapital ? data.propertyValue - data.initialFee - 470000 : data.propertyValue - data.initialFee,
+      monthlyPayment: getMonthlyPayment(!data.maternityCapital ? data.propertyValue - data.initialFee - 470000 : data.propertyValue - data.initialFee, data.interestRate, data.loanTerms),
     });
   };
 
@@ -303,12 +349,12 @@ function Calculator() {
                 </div>
 
                 <div className="offer__wrapper">
-                  <p className="offer__number">{data.initialFee / data.propertyValue < 0.15 ? '9,40%' : '8,50%'}</p>
+                  <p className="offer__number">{data.initialFee / data.propertyValue * 100 < 15 ? '9,40%' : '8,50%'}</p>
                   <p className="offer__text">Процентная ставка </p>
                 </div>
 
                 <div className="offer__wrapper">
-                  <p className="offer__number">27 868 рублей </p>
+                  <p className="offer__number">{getNumberWithSpaces(data.monthlyPayment)} рублей </p>
                   <p className="offer__text">Ежемесячный платеж </p>
                 </div>
 
