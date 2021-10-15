@@ -6,6 +6,8 @@ function Calculator() {
     propertyValue: 2000000,
     initialFee: 200000,
     loanTerms: 5,
+    maternityCapital: true,
+    sum: 1330000,
   });
 
   const [inputError, setInputError] = useState(false);
@@ -38,6 +40,15 @@ function Calculator() {
     return '0';
   };
 
+  const getCreditSum = () => {
+    console.log(data.propertyValue);
+
+    setData({
+      ...data,
+      sum: data.maternityCapital ? data.propertyValue - data.initialFee - 470000 : data.propertyValue - data.initialFee,
+    });
+  };
+
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
       details.current.open = true;
@@ -66,6 +77,7 @@ function Calculator() {
       ...data,
       propertyValue: number,
       initialFee: number * 0.1,
+      sum: data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -91,6 +103,7 @@ function Calculator() {
       ...data,
       propertyValue: number,
       initialFee: number * 0.1,
+      sum: data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -115,6 +128,7 @@ function Calculator() {
       ...data,
       propertyValue: number,
       initialFee: number * 0.1,
+      sum: data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -126,10 +140,11 @@ function Calculator() {
     const number = getNumberFromString(evt.target.value) > data.propertyValue ? data.propertyValue : getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
 
-    if (number < data.propertyValue * 0.10) {
+    if (number < data.propertyValue * 0.1) {
       setData({
         ...data,
-        initialFee: data.propertyValue * 0.10,
+        initialFee: data.propertyValue * 0.1,
+        sum: data.maternityCapital ? data.propertyValue - (data.propertyValue * 0.1) - 470000 : data.propertyValue - (data.propertyValue * 0.1),
       });
 
       initialFee.current.value = `${getNumberWithSpaces(data.propertyValue * 0.10)} рублей`;
@@ -142,6 +157,7 @@ function Calculator() {
     setData({
       ...data,
       initialFee: number,
+      sum: data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number,
     });
 
     initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
@@ -151,6 +167,12 @@ function Calculator() {
 
   const handleInitialFeeChange = (evt) => {
     const number = data.propertyValue / 100 * getNumberFromString(evt.target.value);
+
+    setData({
+      ...data,
+      initialFee: number,
+      sum: data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number,
+    });
 
     initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
   };
@@ -199,6 +221,14 @@ function Calculator() {
     const number = getNumberFromString(evt.target.value);
 
     loanTerms.current.value = `${number} лет`;
+  };
+
+  const handleMaternityCapitalClick = () => {
+    setData({
+      ...data,
+      maternityCapital: !data.maternityCapital,
+      sum: !data.maternityCapital ? data.propertyValue - data.initialFee - 470000 : data.propertyValue - data.initialFee,
+    });
   };
 
   const handleMakeRequestClick = (evt) => {
@@ -264,7 +294,7 @@ function Calculator() {
               <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
               <label htmlFor="loanTermsRange" className="calculator__range-text calculator__range-text--max">30 лет</label>
 
-              <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" defaultChecked />
+              <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" checked={data.maternityCapital} onClick={handleMaternityCapitalClick}/>
               <label className="calculator__label calculator__label--checkbox" htmlFor="maternityCapital">Использовать материнский капитал</label>
             </fieldset>
 
@@ -272,7 +302,7 @@ function Calculator() {
               <p className="offer__header">Наше предложение</p>
 
               <div className="offer__wrapper">
-                <p className="offer__number">1 330 000 рублей </p>
+                <p className="offer__number">{getNumberWithSpaces(data.sum)} рублей </p>
                 <p className="offer__text">Сумма ипотеки </p>
               </div>
 
