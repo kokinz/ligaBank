@@ -5,7 +5,7 @@ function Calculator() {
     creditTarget: '',
     propertyValue: 2000000,
     initialFee: 200000,
-    loanTerms: '5 лет',
+    loanTerms: 5,
   });
 
   const [inputError, setInputError] = useState(false);
@@ -16,6 +16,7 @@ function Calculator() {
   const initialFee = useRef();
   const initialFeeRange = useRef();
   const loanTerms = useRef();
+  const loanTermsRange = useRef();
 
   const getNumberFromString = (str) => parseInt(str.replace(/[^0-9]/g, ''), 10) || '';
 
@@ -144,7 +145,6 @@ function Calculator() {
     });
 
     initialFee.current.value = `${getNumberWithSpaces(number)} рублей`;
-    console.log(number / data.propertyValue * 100);
     initialFeeRange.current.value = number / data.propertyValue * 100;
     initialFee.current.selectionStart = initialFee.current.selectionEnd = cursorPosition;
   };
@@ -166,6 +166,7 @@ function Calculator() {
       });
 
       loanTerms.current.value = '5 лет';
+      loanTermsRange.current.value = 5;
       loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
 
       return;
@@ -178,6 +179,7 @@ function Calculator() {
       });
 
       loanTerms.current.value = '30 лет';
+      loanTermsRange.current.value = 30;
       loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
 
       return;
@@ -189,7 +191,14 @@ function Calculator() {
     });
 
     loanTerms.current.value = `${getNumberWithSpaces(number)} лет`;
+    loanTermsRange.current.value = number;
     loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
+  };
+
+  const handleLoanTermsChange = (evt) => {
+    const number = getNumberFromString(evt.target.value);
+
+    loanTerms.current.value = `${number} лет`;
   };
 
   const handleMakeRequestClick = (evt) => {
@@ -251,7 +260,7 @@ function Calculator() {
               <label className="calculator__label" htmlFor="loanTerms">Срок кредитования</label>
               <input className="calculator__input calculator__input--loan-terms" ref={loanTerms} type="text" id="loanTerms" defaultValue="5 лет" onChange={handleLoanTermsType} />
 
-              <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" type="range" min="5" max="30" step="1" defaultValue="5" />
+              <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" ref={loanTermsRange} type="range" min="5" max="30" step="1" defaultValue="5" onChange={handleLoanTermsChange} />
               <label htmlFor="loanTermsRange" className="calculator__range-text">5 лет</label>
               <label htmlFor="loanTermsRange" className="calculator__range-text calculator__range-text--max">30 лет</label>
 
