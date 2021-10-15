@@ -289,31 +289,36 @@ function Calculator() {
               <label className="calculator__label calculator__label--checkbox" htmlFor="maternityCapital">Использовать материнский капитал</label>
             </fieldset>
 
-            <div className="calculator__offer offer">
-              <p className="offer__header">Наше предложение</p>
+            {data.sum < 500000 ?
+              <div className="calculator__offer calculator__offer--error offer">
+                <p className="offer__header">Наш банк не выдаёт ипотечные кредиты меньше 500 000 рублей.</p>
+                <p className="offer__text offer__text--error">Попробуйте использовать другие параметры для расчёта. </p>
+              </div> :
+              <div className="calculator__offer offer">
+                <p className="offer__header">Наше предложение</p>
 
-              <div className="offer__wrapper">
-                <p className="offer__number">{getNumberWithSpaces(data.sum)} рублей </p>
-                <p className="offer__text">Сумма ипотеки </p>
-              </div>
+                <div className="offer__wrapper">
+                  <p className="offer__number">{getNumberWithSpaces(data.sum)} рублей </p>
+                  <p className="offer__text">Сумма ипотеки </p>
+                </div>
 
-              <div className="offer__wrapper">
-                <p className="offer__number">9,40% </p>
-                <p className="offer__text">Процентная ставка </p>
-              </div>
+                <div className="offer__wrapper">
+                  <p className="offer__number">{data.initialFee / data.propertyValue < 0.15 ? '9,40%' : '8,50%'}</p>
+                  <p className="offer__text">Процентная ставка </p>
+                </div>
 
-              <div className="offer__wrapper">
-                <p className="offer__number">27 868 рублей </p>
-                <p className="offer__text">Ежемесячный платеж </p>
-              </div>
+                <div className="offer__wrapper">
+                  <p className="offer__number">27 868 рублей </p>
+                  <p className="offer__text">Ежемесячный платеж </p>
+                </div>
 
-              <div className="offer__wrapper">
-                <p className="offer__number">61 929 рублей </p>
-                <p className="offer__text">Необходимый доход </p>
-              </div>
+                <div className="offer__wrapper">
+                  <p className="offer__number">61 929 рублей </p>
+                  <p className="offer__text">Необходимый доход </p>
+                </div>
 
-              <button className="offer__button button" type="button" onClick={handleMakeRequestClick}>Оформить заявку</button>
-            </div>
+                <button className="offer__button button" type="button" onClick={handleMakeRequestClick}>Оформить заявку</button>
+              </div>}
           </>
           : ''}
 

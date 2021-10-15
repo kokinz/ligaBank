@@ -552,13 +552,16 @@
 
   background-color: #F6F7FF;
   border-radius: 4px;
+
+  &--error {
+    height: 225px;
+  }
 }
 
 .offer__header {
   box-sizing: border-box;
 
-  width: 500px;
-  height: 84px;
+  width: 375px;
   margin: 0;
   padding-top: 53px;
 }
@@ -591,6 +594,11 @@
   line-height: 22px;
 
   color: #394959;
+
+  &--error {
+    margin-top: 10px;
+    width: 260px;
+  }
 }
 
 .offer__button {
