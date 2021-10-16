@@ -1,5 +1,36 @@
 import React, {useState, useRef} from 'react';
 
+const loanType = {
+  mortgage: 'Ипотечное кредитование',
+  carLending: 'Автомобильное кредитование',
+};
+
+const getNumberFromString = (str) => parseInt(str.replace(/[^0-9]/g, ''), 10) || '';
+
+const getNumberWithSpaces = (number) => {
+  const chars = [...number.toString()];
+
+  if (chars.length !== 0) {
+    const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
+      const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
+
+      return spaceOrNothing + char + acc;
+    });
+
+    const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
+
+    return result;
+  }
+
+  return '0';
+};
+
+const getMonthlyPayment = (sum, rate, years) => {
+  const periods = years * 12;
+
+  return parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10);
+};
+
 function Calculator() {
   const MOUNTLY_INTEREST_RATE = {
     low: 0.007083,
@@ -7,6 +38,7 @@ function Calculator() {
   };
 
   const [data, setData] = useState({
+    id: '0010',
     creditTarget: '',
     propertyValue: 2000000,
     initialFee: 200000,
@@ -21,37 +53,18 @@ function Calculator() {
   const [formShown, setFormShown] = useState(false);
 
   const details = useRef();
+
   const propertyValue = useRef();
+
   const initialFee = useRef();
   const initialFeeRange = useRef();
+
   const loanTerms = useRef();
   const loanTermsRange = useRef();
 
-  const getNumberFromString = (str) => parseInt(str.replace(/[^0-9]/g, ''), 10) || '';
-
-  const getNumberWithSpaces = (number) => {
-    const chars = [...number.toString()];
-
-    if (chars.length !== 0) {
-      const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
-        const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
-
-        return spaceOrNothing + char + acc;
-      });
-
-      const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
-
-      return result;
-    }
-
-    return '0';
-  };
-
-  const getMonthlyPayment = (sum, rate, years) => {
-    const periods = years * 12;
-
-    return parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10);
-  };
+  const userFullName = useRef();
+  const userPhoneNumber = useRef();
+  const userEmail = useRef();
 
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
@@ -59,18 +72,20 @@ function Calculator() {
       return;
     }
 
-    setData({
-      ...data,
-      creditTarget: evt.target.title,
-    });
+    if (evt.target.title === loanType.mortgage || evt.target.title === loanType.carLending) {
+      setData({
+        ...data,
+        creditTarget: evt.target.title,
+      });
 
-    details.current.open = false;
+      details.current.open = false;
+    }
   };
 
   const handlePropertyValueType = (evt) => {
     const number = getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
-    const sum = data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1);
+    const sum = data.maternityCapital ? number - (parseInt(number * 0.1, 10)) - 470000 : number - (parseInt(number * 0.1, 10));
 
     if (number < 1200000 || number > 25000000) {
       setInputError(true);
@@ -95,7 +110,7 @@ function Calculator() {
 
   const handlePropertyValueMinus = () => {
     const number = getNumberFromString(propertyValue.current.value) - 100000;
-    const sum = data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1);
+    const sum = data.maternityCapital ? number - (parseInt(number * 0.1, 10)) - 470000 : number - (parseInt(number * 0.1, 10));
 
     if (number < 1200000) {
       return;
@@ -123,7 +138,7 @@ function Calculator() {
 
   const handlePropertyValuePlus = () => {
     const number = getNumberFromString(propertyValue.current.value) + 100000;
-    const sum = data.maternityCapital ? number - (number * 0.1) - 470000 : number - (number * 0.1);
+    const sum = data.maternityCapital ? number - (parseInt(number * 0.1, 10)) - 470000 : number - (parseInt(number * 0.1, 10));
 
     if (number > 25000000) {
       return;
@@ -155,17 +170,17 @@ function Calculator() {
     let sum = 0;
 
     if (number < data.propertyValue * 0.1) {
-      sum = data.maternityCapital ? data.propertyValue - (data.propertyValue * 0.1) - 470000 : data.propertyValue - (data.propertyValue * 0.1);
+      sum = data.maternityCapital ? data.propertyValue - (parseInt(data.propertyValue * 0.1, 10)) - 470000 : data.propertyValue - (parseInt(data.propertyValue * 0.1, 10));
 
       setData({
         ...data,
-        initialFee: data.propertyValue * 0.1,
+        initialFee: parseInt(data.propertyValue * 0.1, 10),
         sum: sum,
         interestRate: MOUNTLY_INTEREST_RATE.high,
         monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
       });
 
-      initialFee.current.value = `${getNumberWithSpaces(data.propertyValue * 0.10)} рублей`;
+      initialFee.current.value = `${getNumberWithSpaces(parseInt(data.propertyValue * 0.1, 10))} рублей`;
       initialFeeRange.current.value = 10;
       initialFee.current.selectionStart = initialFee.current.selectionEnd = cursorPosition;
 
@@ -188,8 +203,8 @@ function Calculator() {
   };
 
   const handleInitialFeeChange = (evt) => {
-    const number = data.propertyValue / 100 * getNumberFromString(evt.target.value);
-    const sum = data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number;
+    const number = parseInt(data.propertyValue / 100 * getNumberFromString(evt.target.value), 10);
+    const sum = parseInt(data.maternityCapital ? data.propertyValue - number - 470000 : data.propertyValue - number, 10);
 
     setData({
       ...data,
@@ -271,6 +286,35 @@ function Calculator() {
     setFormShown(true);
   };
 
+  const handleUserPhoneNumberType = (evt) => {
+    let cursorPosition = evt.target.selectionStart === 1 ? evt.target.selectionStart + 3 : evt.target.selectionStart;
+    const number = getNumberFromString(evt.target.value);
+    const chars = [...number.toString()];
+    const result = `+${chars[0]} (${chars.slice(1, 4).join('')}) ${chars.slice(4, 7).join('')} ${chars.slice(7, 11).join('')}`;
+
+    if (number === '') {
+      userPhoneNumber.current.value = '';
+      return;
+    }
+
+    if (cursorPosition === 7) {
+      cursorPosition = 9;
+    }
+
+    if (cursorPosition === 8) {
+      cursorPosition = 7;
+    }
+
+    if (cursorPosition === 12) {
+      cursorPosition = 13;
+    } else if (cursorPosition === 13) {
+      cursorPosition = 12;
+    }
+
+    userPhoneNumber.current.value = result;
+    userPhoneNumber.current.selectionStart = userPhoneNumber.current.selectionEnd = cursorPosition;
+  };
+
   return(
     <section className="calculator container">
       <h2 className="calculator__header">Кредитный калькулятор</h2>
@@ -281,11 +325,11 @@ function Calculator() {
 
           <details className="calculator__selector selector" ref={details}>
             <summary className="selector__summary">
-              <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" defaultChecked />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" defaultChecked onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" title="Ипотечное кредитование" onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" title={loanType.mortgage} onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" title="Автомобильное кредитование" onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" title={loanType.carLending} onClick={handleSelectorClick} />
             </summary>
 
             <ul className="selector__options list">
@@ -357,7 +401,7 @@ function Calculator() {
                 </div>
 
                 <div className="offer__wrapper">
-                  <p className="offer__number">61 929 рублей </p>
+                  <p className="offer__number">{getNumberWithSpaces(Math.round(data.monthlyPayment / 45 * 100))} рублей </p>
                   <p className="offer__text">Необходимый доход </p>
                 </div>
 
@@ -374,35 +418,41 @@ function Calculator() {
               <li className="calculator__data-item">
                 <span className="calculator__data-header">Номер заявки</span>
 
-                <span className="calculator__data-value">№ 0010</span>
+                <span className="calculator__data-value">№ {data.id}</span>
               </li>
               <li className="calculator__data-item">
                 <span className="calculator__data-header">Цель кредита</span>
 
-                <span className="calculator__data-value">Ипотека</span>
+                <span className="calculator__data-value">
+                  {data.creditTarget === loanType.mortgage && 'Ипотека'}
+                  {data.creditTarget === loanType.carLending && 'Автокредит'}
+                </span>
               </li>
               <li className="calculator__data-item">
-                <span className="calculator__data-header">Стоимость недвижимости</span>
+                <span className="calculator__data-header">
+                  {data.creditTarget === loanType.mortgage && 'Стоимость недвижимости'}
+                  {data.creditTarget === loanType.carLending && 'Стоимость автомобиля'}
+                </span>
 
-                <span className="calculator__data-value">2 000 000 рублей</span>
+                <span className="calculator__data-value">{getNumberWithSpaces(data.propertyValue)} рублей</span>
               </li>
               <li className="calculator__data-item">
                 <span className="calculator__data-header">Первоначальный взнос</span>
 
-                <span className="calculator__data-value">200 000 рублей</span>
+                <span className="calculator__data-value">{getNumberWithSpaces(data.initialFee)} рублей</span>
               </li>
               <li className="calculator__data-item">
                 <span className="calculator__data-header">Срок кредитования</span>
 
-                <span className="calculator__data-value">5 лет</span>
+                <span className="calculator__data-value">{data.loanTerms} лет</span>
               </li>
             </ul>
 
-            <input className="calculator__input calculator__input--full-name" type="text" placeholder="ФИО" autoFocus />
+            <input className="calculator__input calculator__input--full-name" type="text" ref={userFullName} placeholder="ФИО" autoFocus required/>
 
-            <input className="calculator__input calculator__input--user-phone" type="text" placeholder="Телефон" />
+            <input className="calculator__input calculator__input--user-phone" type="tel" ref={userPhoneNumber} onChange={handleUserPhoneNumberType} placeholder="Телефон" required/>
 
-            <input className="calculator__input calculator__input--user-email" type="text" placeholder="E-mail" />
+            <input className="calculator__input calculator__input--user-email" type="email" ref={userEmail} placeholder="E-mail" required/>
 
             <button className="calculator__submit button" type="submit">Отправить</button>
           </fieldset>
