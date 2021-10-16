@@ -51,8 +51,6 @@ function Calculator() {
     const periods = years * 12;
 
     return parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10);
-
-    // console.log(parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10));
   };
 
   const handleSelectorClick = (evt) => {
@@ -83,14 +81,14 @@ function Calculator() {
     setData({
       ...data,
       propertyValue: number,
-      initialFee: number * 0.1,
+      initialFee: parseInt(number * 0.1, 10),
       sum: sum,
       interestRate: MOUNTLY_INTEREST_RATE.high,
       monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
-    initialFee.current.value = `${getNumberWithSpaces(number * 0.1)} рублей`;
+    initialFee.current.value = `${getNumberWithSpaces(parseInt(number * 0.1, 10))} рублей`;
     initialFeeRange.current.value = 10;
     propertyValue.current.selectionStart = propertyValue.current.selectionEnd = cursorPosition;
   };
@@ -112,14 +110,14 @@ function Calculator() {
     setData({
       ...data,
       propertyValue: number,
-      initialFee: number * 0.1,
+      initialFee: parseInt(number * 0.1, 10),
       sum: sum,
       interestRate: MOUNTLY_INTEREST_RATE.high,
       monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
-    initialFee.current.value = `${getNumberWithSpaces(number * 0.1)} рублей`;
+    initialFee.current.value = `${getNumberWithSpaces(parseInt(number * 0.1, 10))} рублей`;
     initialFeeRange.current.value = 10;
   };
 
@@ -140,14 +138,14 @@ function Calculator() {
     setData({
       ...data,
       propertyValue: number,
-      initialFee: number * 0.1,
+      initialFee: parseInt(number * 0.1, 10),
       sum: sum,
       interestRate: MOUNTLY_INTEREST_RATE.high,
       monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.high, data.loanTerms),
     });
 
     propertyValue.current.value = `${getNumberWithSpaces(number)} рублей`;
-    initialFee.current.value = `${getNumberWithSpaces(number * 0.1)} рублей`;
+    initialFee.current.value = `${getNumberWithSpaces(parseInt(number * 0.1, 10))} рублей`;
     initialFeeRange.current.value = 10;
   };
 
