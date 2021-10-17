@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import ThanksPopus from '../popups/thanks-popup/thanks-popup';
 
 const loanType = {
   mortgage: 'Ипотечное кредитование',
@@ -51,6 +52,7 @@ function Calculator() {
 
   const [inputError, setInputError] = useState(false);
   const [formShown, setFormShown] = useState(false);
+  const [popupShown, setPopupShown] = useState(false);
 
   const details = useRef();
 
@@ -315,11 +317,38 @@ function Calculator() {
     userPhoneNumber.current.selectionStart = userPhoneNumber.current.selectionEnd = cursorPosition;
   };
 
+  const handleEscKeydown = (evt) => {
+    if (evt.key === ('Escape' || 'Esc')) {
+      evt.preventDefault();
+
+      setPopupShown(false);
+      window.removeEventListener('keydown', handleEscKeydown);
+    }
+  };
+
+  const handlePopupClose = (evt) => {
+    setPopupShown(false);
+    window.removeEventListener('keydown', handleEscKeydown);
+  };
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    localStorage.setItem('userData', JSON.stringify({
+      userFullName: userFullName.current.value,
+      userPhoneNumber: userPhoneNumber.current.value,
+      userEmail: userEmail.current.value,
+    }));
+
+    setPopupShown(true);
+    window.addEventListener('keydown', handleEscKeydown);
+  };
+
   return(
     <section className="calculator container">
       <h2 className="calculator__header">Кредитный калькулятор</h2>
 
-      <form className="calculator__form" action="https://echo.htmlacademy.ru/">
+      <form className="calculator__form" action="https://echo.htmlacademy.ru/" onSubmit={handleFormSubmit}>
         <fieldset className="calculator__fieldset calculator__fieldset--first-step">
           <legend className="calculator__legend">Шаг 1. Цель кредита</legend>
 
@@ -458,6 +487,8 @@ function Calculator() {
           </fieldset>
           : ''}
       </form>
+
+      {popupShown && <ThanksPopus onCloseClick={handlePopupClose} />}
     </section>
   );
 }

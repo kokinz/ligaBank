@@ -657,3 +657,14 @@
   background-color: #2C36F2;
   border-radius: 4px;
 }
+
+.calculator__popup-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(0,0,0,.3);
+}
