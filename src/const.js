@@ -1,24 +1,35 @@
 const CREDIT_START_SUM = 2000000;
 const ZERO_LENGTH = 4;
 const PERCENTAGE_INCOME = 45;
+const SLIDE_DELAY = 4000;
 
 const Tab = {
   CONTRIBUTIONS: {
+    id: 1,
     name: 'Вклады',
     icon: 'vault',
   },
   CREDITS: {
+    id: 2,
     name: 'Кредиты',
     icon: 'cards',
   },
   INSURANCE: {
+    id: 3,
     name: 'Страхование',
     icon: 'security',
   },
   ONLINE_SERVICES: {
+    id: 4,
     name: 'Онлайн-сервисы',
     icon: 'mobile',
   },
+};
+
+const Slide = {
+  CREDIT: 1,
+  CONFIDENCE: 2,
+  BRANCH: 3,
 };
 
 const LoanType = {
@@ -56,4 +67,4 @@ const MountlyInterestRate = {
   LOWEST: 0.002916,
 };
 
-export {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, Tab, LoanType, Mortgage, CarLending, MountlyInterestRate};
+export {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, SLIDE_DELAY, Tab, Slide, LoanType, Mortgage, CarLending, MountlyInterestRate};

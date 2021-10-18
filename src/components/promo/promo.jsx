@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
-const SLIDE_DELAY = 4000;
-
-const Slide = {
-  CREDIT: 1,
-  CONFIDENCE: 2,
-  BRANCH: 3,
-};
+import {Slide, SLIDE_DELAY} from '../../const';
 
 function Promo() {
   const [activeSlide, setActiveSlide] = useState(Slide.CREDIT);
