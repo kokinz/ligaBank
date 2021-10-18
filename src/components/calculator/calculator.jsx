@@ -1,69 +1,8 @@
 import React, {useState, useRef} from 'react';
 import ThanksPopus from '../popups/thanks-popup/thanks-popup';
 
-const loanType = {
-  mortgage: 'Ипотечное кредитование',
-  carLending: 'Автомобильное кредитование',
-};
-
-const CREDIT_START_SUM = 2000000;
-
-const MORTGAGE = {
-  min: 1200000,
-  max: 25000000,
-  step: 100000,
-  initialFee: 10,
-  minTerm: 5,
-  maxTerm: 30,
-  minSum: 500000,
-  maternityCapital: 470000,
-};
-
-const CAR_LENDING = {
-  min: 500000,
-  max: 5000000,
-  step: 50000,
-  initialFee: 5,
-  minTerm: 1,
-  maxTerm: 5,
-  minSum: 200000,
-};
-
-const MOUNTLY_INTEREST_RATE = {
-  highest: 0.013,
-  high: 0.0125,
-  middle: 0.00783,
-  low: 0.007083,
-  lowest: 0.002916,
-};
-
-const getNumberFromString = (str) => parseInt(str.replace(/[^0-9]/g, ''), 10) || '';
-
-const getNumberWithSpaces = (number) => {
-  const chars = [...number.toString()];
-
-  if (chars.length !== 0) {
-    const stringWithSpace = chars.reduceRight((acc, char, index, array) => {
-      const spaceOrNothing = (array.length - index) % 3 === 0 ? ' ' : '';
-
-      return spaceOrNothing + char + acc;
-    });
-
-    const result = stringWithSpace[0] === ' ' ? stringWithSpace.slice(1) : stringWithSpace;
-
-    return result;
-  }
-
-  return '0';
-};
-
-const getMonthlyPayment = (sum, rate, years) => {
-  const periods = years * 12;
-
-  return parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10);
-};
-
-/////////////////////////////////////////////////////////////
+import {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, LoanType, Mortgage, CarLending, MountlyInterestRate} from '../../const';
+import {getNumberFromString, getNumberWithSpaces, getMonthlyPayment} from '../../utils';
 
 function Calculator() {
   const [data, setData] = useState({
@@ -115,74 +54,74 @@ function Calculator() {
       return;
     }
 
-    if (evt.target.title === loanType.mortgage || evt.target.title === loanType.carLending) {
-      if (evt.target.title === loanType.mortgage) {
+    if (evt.target.title === LoanType.MORTGAGE || evt.target.title === LoanType.CAR_LENDING) {
+      if (evt.target.title === LoanType.MORTGAGE) {
         setData({
           ...data,
           creditTarget: evt.target.title,
           propertyValue: CREDIT_START_SUM,
-          initialFee: CREDIT_START_SUM / MORTGAGE.initialFee,
-          loanTerms: MORTGAGE.minTerm,
+          initialFee: CREDIT_START_SUM / Mortgage.INITIAL_FEE,
+          loanTerms: Mortgage.MIN_TERM,
           maternityCapital: true,
-          sum: CREDIT_START_SUM - MORTGAGE.maternityCapital - CREDIT_START_SUM / MORTGAGE.initialFee,
-          interestRate: MOUNTLY_INTEREST_RATE.middle,
-          monthlyPayment: getMonthlyPayment(CREDIT_START_SUM - MORTGAGE.maternityCapital - CREDIT_START_SUM / MORTGAGE.initialFee, MOUNTLY_INTEREST_RATE.middle, MORTGAGE.minTerm),
+          sum: CREDIT_START_SUM - Mortgage.MATERNITY_CAPITAL - CREDIT_START_SUM / Mortgage.INITIAL_FEE,
+          interestRate: MountlyInterestRate.MIDDLE,
+          monthlyPayment: getMonthlyPayment(CREDIT_START_SUM - Mortgage.MATERNITY_CAPITAL - CREDIT_START_SUM / Mortgage.INITIAL_FEE, MountlyInterestRate.MIDDLE, Mortgage.MIN_TERM),
         });
 
         setSetting({
           ...setting,
-          step: MORTGAGE.step,
-          minInitialFee: MORTGAGE.initialFee,
-          min: MORTGAGE.min,
-          max: MORTGAGE.max,
-          minTerm: MORTGAGE.minTerm,
-          maxTerm: MORTGAGE.maxTerm,
-          maternityCapital: MORTGAGE.maternityCapital,
-          minSum: MORTGAGE.minSum,
+          step: Mortgage.STEP,
+          minInitialFee: Mortgage.INITIAL_FEE,
+          min: Mortgage.MIN,
+          max: Mortgage.MAX,
+          minTerm: Mortgage.MIN_TERM,
+          maxTerm: Mortgage.MAX_TERM,
+          maternityCapital: Mortgage.MATERNITY_CAPITAL,
+          minSum: Mortgage.MIN_SUM,
         });
 
         if (data.creditTarget) {
           propertyValue.current.value = `${getNumberWithSpaces(CREDIT_START_SUM)} рублей`;
-          initialFee.current.value = `${getNumberWithSpaces(CREDIT_START_SUM / MORTGAGE.initialFee)} рублей`;
-          initialFeeRange.current.min = 100 / MORTGAGE.initialFee;
-          initialFeeRange.current.value = 100 / MORTGAGE.initialFee;
-          loanTerms.current.value = `${getNumberWithSpaces(MORTGAGE.minTerm)} лет`;
-          loanTermsRange.current.value = MORTGAGE.minTerm;
+          initialFee.current.value = `${getNumberWithSpaces(CREDIT_START_SUM / Mortgage.INITIAL_FEE)} рублей`;
+          initialFeeRange.current.min = 100 / Mortgage.INITIAL_FEE;
+          initialFeeRange.current.value = 100 / Mortgage.INITIAL_FEE;
+          loanTerms.current.value = `${getNumberWithSpaces(Mortgage.MIN_TERM)} лет`;
+          loanTermsRange.current.value = Mortgage.MIN_TERM;
         }
       }
 
-      if (evt.target.title === loanType.carLending) {
+      if (evt.target.title === LoanType.CAR_LENDING) {
         setData({
           ...data,
           creditTarget: evt.target.title,
           propertyValue: CREDIT_START_SUM,
-          initialFee: CREDIT_START_SUM / CAR_LENDING.initialFee,
-          loanTerms: CAR_LENDING.maxTerm,
+          initialFee: CREDIT_START_SUM / CarLending.INITIAL_FEE,
+          loanTerms: CarLending.MAX_TERM,
           casco: true,
           lifeInsurance: true,
-          sum: CREDIT_START_SUM - CREDIT_START_SUM / CAR_LENDING.initialFee,
-          interestRate: MOUNTLY_INTEREST_RATE.lowest,
-          monthlyPayment: getMonthlyPayment(CREDIT_START_SUM - CREDIT_START_SUM / CAR_LENDING.initialFee, MOUNTLY_INTEREST_RATE.lowest, CAR_LENDING.maxTerm),
+          sum: CREDIT_START_SUM - CREDIT_START_SUM / CarLending.INITIAL_FEE,
+          interestRate: MountlyInterestRate.LOWEST,
+          monthlyPayment: getMonthlyPayment(CREDIT_START_SUM - CREDIT_START_SUM / CarLending.INITIAL_FEE, MountlyInterestRate.LOWEST, CarLending.MAX_TERM),
         });
 
         setSetting({
           ...setting,
-          step: CAR_LENDING.step,
-          minInitialFee: CAR_LENDING.initialFee,
-          min: CAR_LENDING.min,
-          max: CAR_LENDING.max,
-          minTerm: CAR_LENDING.minTerm,
-          maxTerm: CAR_LENDING.maxTerm,
+          step: CarLending.STEP,
+          minInitialFee: CarLending.INITIAL_FEE,
+          min: CarLending.MIN,
+          max: CarLending.MAX,
+          minTerm: CarLending.MIN_TERM,
+          maxTerm: CarLending.MAX_TERM,
           maternityCapital: 0,
-          minSum: CAR_LENDING.minSum,
+          minSum: CarLending.MIN_SUM,
         });
 
         if (data.creditTarget) {
           propertyValue.current.value = `${getNumberWithSpaces(CREDIT_START_SUM)} рублей`;
-          initialFee.current.value = `${getNumberWithSpaces(CREDIT_START_SUM / CAR_LENDING.initialFee)} рублей`;
-          initialFeeRange.current.value = 100 / CAR_LENDING.initialFee;
-          loanTerms.current.value = `${getNumberWithSpaces(CAR_LENDING.maxTerm)} лет`;
-          loanTermsRange.current.value = CAR_LENDING.maxTerm;
+          initialFee.current.value = `${getNumberWithSpaces(CREDIT_START_SUM / CarLending.INITIAL_FEE)} рублей`;
+          initialFeeRange.current.value = 100 / CarLending.INITIAL_FEE;
+          loanTerms.current.value = `${getNumberWithSpaces(CarLending.MAX_TERM)} лет`;
+          loanTermsRange.current.value = CarLending.MAX_TERM;
         }
       }
 
@@ -201,26 +140,26 @@ function Calculator() {
       setInputError(false);
     }
 
-    if (data.creditTarget === loanType.mortgage) {
+    if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
         ...data,
         propertyValue: number,
         initialFee: parseInt(number / setting.minInitialFee, 10),
         sum: sum,
-        interestRate: MOUNTLY_INTEREST_RATE.middle,
-        monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.middle, data.loanTerms),
+        interestRate: MountlyInterestRate.MIDDLE,
+        monthlyPayment: getMonthlyPayment(sum, MountlyInterestRate.MIDDLE, data.loanTerms),
       });
     }
 
-    if (data.creditTarget === loanType.carLending) {
+    if (data.creditTarget === LoanType.CAR_LENDING) {
       if (!data.casco && !data.lifeInsurance) {
         setData({
           ...data,
           propertyValue: number,
           initialFee: parseInt(number / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: number < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high,
-          monthlyPayment: getMonthlyPayment(sum, number < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high, data.loanTerms),
+          interestRate: number < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH,
+          monthlyPayment: getMonthlyPayment(sum, number < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH, data.loanTerms),
         });
       }
 
@@ -230,8 +169,8 @@ function Calculator() {
           propertyValue: number,
           initialFee: parseInt(number / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: data.casco && data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low,
-          monthlyPayment: getMonthlyPayment(sum, data.casco && data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+          interestRate: data.casco && data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW,
+          monthlyPayment: getMonthlyPayment(sum, data.casco && data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW, data.loanTerms),
         });
       }
     }
@@ -257,26 +196,26 @@ function Calculator() {
       setInputError(false);
     }
 
-    if (data.creditTarget === loanType.mortgage) {
+    if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
         ...data,
         propertyValue: number,
         initialFee: parseInt(number / setting.minInitialFee, 10),
         sum: sum,
-        interestRate: MOUNTLY_INTEREST_RATE.middle,
-        monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.middle, data.loanTerms),
+        interestRate: MountlyInterestRate.MIDDLE,
+        monthlyPayment: getMonthlyPayment(sum, MountlyInterestRate.MIDDLE, data.loanTerms),
       });
     }
 
-    if (data.creditTarget === loanType.carLending) {
+    if (data.creditTarget === LoanType.CAR_LENDING) {
       if (!data.casco && !data.lifeInsurance) {
         setData({
           ...data,
           propertyValue: number,
           initialFee: parseInt(number / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: number < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high,
-          monthlyPayment: getMonthlyPayment(sum, number < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high, data.loanTerms),
+          interestRate: number < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH,
+          monthlyPayment: getMonthlyPayment(sum, number < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH, data.loanTerms),
         });
       }
 
@@ -286,8 +225,8 @@ function Calculator() {
           propertyValue: number,
           initialFee: parseInt(number / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: data.casco && data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low,
-          monthlyPayment: getMonthlyPayment(sum, data.casco && data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+          interestRate: data.casco && data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW,
+          monthlyPayment: getMonthlyPayment(sum, data.casco && data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW, data.loanTerms),
         });
       }
     }
@@ -311,26 +250,26 @@ function Calculator() {
       setInputError(false);
     }
 
-    if (data.creditTarget === loanType.mortgage) {
+    if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
         ...data,
         propertyValue: number,
         initialFee: parseInt(number / setting.minInitialFee, 10),
         sum: sum,
-        interestRate: MOUNTLY_INTEREST_RATE.middle,
-        monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.middle, data.loanTerms),
+        interestRate: MountlyInterestRate.MIDDLE,
+        monthlyPayment: getMonthlyPayment(sum, MountlyInterestRate.MIDDLE, data.loanTerms),
       });
     }
 
-    if (data.creditTarget === loanType.carLending) {
+    if (data.creditTarget === LoanType.CAR_LENDING) {
       if (!data.casco && !data.lifeInsurance) {
         setData({
           ...data,
           propertyValue: number,
           initialFee: parseInt(number / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: number < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high,
-          monthlyPayment: getMonthlyPayment(sum, number < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high, data.loanTerms),
+          interestRate: number < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH,
+          monthlyPayment: getMonthlyPayment(sum, number < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH, data.loanTerms),
         });
       }
 
@@ -340,8 +279,8 @@ function Calculator() {
           propertyValue: number,
           initialFee: parseInt(number / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: data.casco && data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low,
-          monthlyPayment: getMonthlyPayment(sum, data.casco && data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+          interestRate: data.casco && data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW,
+          monthlyPayment: getMonthlyPayment(sum, data.casco && data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW, data.loanTerms),
         });
       }
     }
@@ -359,17 +298,17 @@ function Calculator() {
     if (number < data.propertyValue / setting.minInitialFee) {
       sum = parseInt(data.maternityCapital ? data.propertyValue - (data.propertyValue / setting.minInitialFee) - setting.maternityCapital : data.propertyValue - (data.propertyValue / setting.minInitialFee), 10);
 
-      if (data.creditTarget === loanType.mortgage) {
+      if (data.creditTarget === LoanType.MORTGAGE) {
         setData({
           ...data,
           initialFee: parseInt(data.propertyValue / setting.minInitialFee, 10),
           sum: sum,
-          interestRate: MOUNTLY_INTEREST_RATE.middle,
-          monthlyPayment: getMonthlyPayment(sum, MOUNTLY_INTEREST_RATE.middle, data.loanTerms),
+          interestRate: MountlyInterestRate.MIDDLE,
+          monthlyPayment: getMonthlyPayment(sum, MountlyInterestRate.MIDDLE, data.loanTerms),
         });
       }
 
-      if (data.creditTarget === loanType.carLending) {
+      if (data.creditTarget === LoanType.CAR_LENDING) {
         setData({
           ...data,
           initialFee: parseInt(data.propertyValue / setting.minInitialFee, 10),
@@ -387,17 +326,17 @@ function Calculator() {
 
     sum = data.maternityCapital ? data.propertyValue - number - setting.maternityCapital : data.propertyValue - number;
 
-    if (data.creditTarget === loanType.mortgage) {
+    if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
         ...data,
         initialFee: number,
         sum: sum,
-        interestRate: number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.middle : MOUNTLY_INTEREST_RATE.low,
-        monthlyPayment: getMonthlyPayment(sum, number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.middle : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+        interestRate: number / data.propertyValue * 100 < Mortgage.CONTRIBUTIONS_PERCENTAGE ? MountlyInterestRate.MIDDLE : MountlyInterestRate.LOW,
+        monthlyPayment: getMonthlyPayment(sum, number / data.propertyValue * 100 < Mortgage.CONTRIBUTIONS_PERCENTAGE ? MountlyInterestRate.MIDDLE : MountlyInterestRate.LOW, data.loanTerms),
       });
     }
 
-    if (data.creditTarget === loanType.carLending) {
+    if (data.creditTarget === LoanType.CAR_LENDING) {
       setData({
         ...data,
         initialFee: number,
@@ -417,17 +356,17 @@ function Calculator() {
     const sum = parseInt(data.maternityCapital ? data.propertyValue - number - setting.maternityCapital : data.propertyValue - number, 10);
 
 
-    if (data.creditTarget === loanType.mortgage) {
+    if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
         ...data,
         initialFee: number,
         sum: sum,
-        interestRate: number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.middle : MOUNTLY_INTEREST_RATE.low,
-        monthlyPayment: getMonthlyPayment(sum, number / data.propertyValue * 100 < 15 ? MOUNTLY_INTEREST_RATE.middle : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+        interestRate: number / data.propertyValue * 100 < Mortgage.CONTRIBUTIONS_PERCENTAGE ? MountlyInterestRate.MIDDLE : MountlyInterestRate.LOW,
+        monthlyPayment: getMonthlyPayment(sum, number / data.propertyValue * 100 < Mortgage.CONTRIBUTIONS_PERCENTAGE ? MountlyInterestRate.MIDDLE : MountlyInterestRate.LOW, data.loanTerms),
       });
     }
 
-    if (data.creditTarget === loanType.carLending) {
+    if (data.creditTarget === LoanType.CAR_LENDING) {
       setData({
         ...data,
         initialFee: number,
@@ -450,7 +389,7 @@ function Calculator() {
         monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, setting.minTerm),
       });
 
-      loanTerms.current.value = setting.minTerm === CAR_LENDING.minTerm ? `${setting.minTerm} год` : `${setting.minTerm} лет`;
+      loanTerms.current.value = setting.minTerm === CarLending.MIN_TERM ? `${setting.minTerm} год` : `${setting.minTerm} лет`;
       loanTermsRange.current.value = setting.minTerm;
       loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
 
@@ -498,8 +437,8 @@ function Calculator() {
     setData({
       ...data,
       maternityCapital: !data.maternityCapital,
-      sum: !data.maternityCapital ? data.propertyValue - data.initialFee - MORTGAGE.maternityCapital : data.propertyValue - data.initialFee,
-      monthlyPayment: getMonthlyPayment(!data.maternityCapital ? data.propertyValue - data.initialFee - MORTGAGE.maternityCapital : data.propertyValue - data.initialFee, data.interestRate, data.loanTerms),
+      sum: !data.maternityCapital ? data.propertyValue - data.initialFee - Mortgage.MATERNITY_CAPITAL : data.propertyValue - data.initialFee,
+      monthlyPayment: getMonthlyPayment(!data.maternityCapital ? data.propertyValue - data.initialFee - Mortgage.MATERNITY_CAPITAL : data.propertyValue - data.initialFee, data.interestRate, data.loanTerms),
     });
   };
 
@@ -508,8 +447,8 @@ function Calculator() {
       setData({
         ...data,
         casco: !data.casco,
-        interestRate: data.propertyValue < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high,
-        monthlyPayment: getMonthlyPayment(data.sum, data.propertyValue < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high, data.loanTerms),
+        interestRate: data.propertyValue < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH,
+        monthlyPayment: getMonthlyPayment(data.sum, data.propertyValue < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH, data.loanTerms),
       });
 
       return;
@@ -518,8 +457,8 @@ function Calculator() {
     setData({
       ...data,
       casco: !data.casco,
-      interestRate: data.lifeInsurance && !data.casco ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low,
-      monthlyPayment: getMonthlyPayment(data.sum, data.lifeInsurance && !data.casco ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+      interestRate: data.lifeInsurance && !data.casco ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW,
+      monthlyPayment: getMonthlyPayment(data.sum, data.lifeInsurance && !data.casco ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW, data.loanTerms),
     });
   };
 
@@ -528,8 +467,8 @@ function Calculator() {
       setData({
         ...data,
         lifeInsurance: !data.lifeInsurance,
-        interestRate: data.propertyValue < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high,
-        monthlyPayment: getMonthlyPayment(data.sum, data.propertyValue < CREDIT_START_SUM ? MOUNTLY_INTEREST_RATE.highest : MOUNTLY_INTEREST_RATE.high, data.loanTerms),
+        interestRate: data.propertyValue < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH,
+        monthlyPayment: getMonthlyPayment(data.sum, data.propertyValue < CREDIT_START_SUM ? MountlyInterestRate.HIGHEST : MountlyInterestRate.HIGH, data.loanTerms),
       });
 
       return;
@@ -538,8 +477,8 @@ function Calculator() {
     setData({
       ...data,
       lifeInsurance: !data.lifeInsurance,
-      interestRate: data.casco && !data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low,
-      monthlyPayment: getMonthlyPayment(data.sum, data.casco && !data.lifeInsurance ? MOUNTLY_INTEREST_RATE.lowest : MOUNTLY_INTEREST_RATE.low, data.loanTerms),
+      interestRate: data.casco && !data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW,
+      monthlyPayment: getMonthlyPayment(data.sum, data.casco && !data.lifeInsurance ? MountlyInterestRate.LOWEST : MountlyInterestRate.LOW, data.loanTerms),
     });
   };
 
@@ -600,7 +539,13 @@ function Calculator() {
       userEmail: userEmail.current.value,
     }));
 
-    setPopupShown(true);
+    setData({
+      ...data,
+      id: (getNumberFromString(data.id) + 1).toString().padStart(ZERO_LENGTH, '0'),
+    });
+
+    setFormShown(!formShown);
+    setPopupShown(!popupShown);
     window.addEventListener('keydown', handleEscKeydown);
   };
 
@@ -616,9 +561,9 @@ function Calculator() {
             <summary className="selector__summary">
               <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" defaultChecked onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" title={loanType.mortgage} onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" title={LoanType.MORTGAGE} onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" title={loanType.carLending} onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" title={LoanType.CAR_LENDING} onClick={handleSelectorClick} />
             </summary>
 
             <ul className="selector__options list">
@@ -638,8 +583,8 @@ function Calculator() {
               <legend className="calculator__legend calculator__legend">Шаг 2. Введите параметры кредита</legend>
 
               <label className="calculator__label" htmlFor="propertyValue">
-                {data.creditTarget === loanType.mortgage && 'Стоимость недвижимости'}
-                {data.creditTarget === loanType.carLending && 'Стоимость автомобиля'}
+                {data.creditTarget === LoanType.MORTGAGE && 'Стоимость недвижимости'}
+                {data.creditTarget === LoanType.CAR_LENDING && 'Стоимость автомобиля'}
               </label>
               <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
                 <button className="calculator__button-minus button" type="button" onClick={handlePropertyValueMinus}>Минус</button>
@@ -651,8 +596,8 @@ function Calculator() {
                 <button className="calculator__button-plus button" type="button" onClick={handlePropertyValuePlus}>Плюс</button>
               </div>
 
-              {data.creditTarget === loanType.mortgage && <p className="calculator__prompt">От 1 200 000 &nbsp;до 25 000 000 рублей</p>}
-              {data.creditTarget === loanType.carLending && <p className="calculator__prompt">От 500 000 &nbsp;до 5 000 000 рублей</p>}
+              {data.creditTarget === LoanType.MORTGAGE && <p className="calculator__prompt">От {getNumberWithSpaces(Mortgage.MIN)} &nbsp;до {getNumberWithSpaces(Mortgage.MAX)} рублей</p>}
+              {data.creditTarget === LoanType.CAR_LENDING && <p className="calculator__prompt">От {getNumberWithSpaces(CarLending.MIN)} &nbsp;до {getNumberWithSpaces(CarLending.MAX)} рублей</p>}
 
 
               <label className="calculator__label" htmlFor="initialFee">Первоначальный взнос</label>
@@ -668,13 +613,13 @@ function Calculator() {
               <label htmlFor="loanTermsRange" className="calculator__range-text">{setting.minTerm === 1 ? `${setting.minTerm} год` : `${setting.minTerm} лет`}</label>
               <label htmlFor="loanTermsRange" className="calculator__range-text calculator__range-text--max">{setting.maxTerm} лет</label>
 
-              {data.creditTarget === loanType.mortgage &&
+              {data.creditTarget === LoanType.MORTGAGE &&
               <>
                 <input className="visually-hidden calculator__checkbox" type="checkbox" id="maternityCapital" checked={data.maternityCapital} onChange={handleMaternityCapitalClick}/>
                 <label className="calculator__label calculator__label--checkbox" htmlFor="maternityCapital">Использовать материнский капитал</label>
               </>}
 
-              {data.creditTarget === loanType.carLending &&
+              {data.creditTarget === LoanType.CAR_LENDING &&
               <>
                 <input className="visually-hidden calculator__checkbox" type="checkbox" id="casco" checked={data.casco} onChange={handleCascoClick}/>
                 <label className="calculator__label calculator__label--checkbox" htmlFor="casco">Оформить КАСКО в нашем банке</label>
@@ -688,8 +633,8 @@ function Calculator() {
               <div className="calculator__offer calculator__offer--error offer">
                 <p className="offer__header">
                   Наш банк не выдаёт
-                  {data.creditTarget === loanType.mortgage && ' ипотечные кредиты меньше 500 000 рублей.'}
-                  {data.creditTarget === loanType.carLending && ' автокредиты меньше 200 000 рублей.' }
+                  {data.creditTarget === LoanType.MORTGAGE && ' ипотечные кредиты меньше 500 000 рублей.'}
+                  {data.creditTarget === LoanType.CAR_LENDING && ' автокредиты меньше 200 000 рублей.' }
                 </p>
                 <p className="offer__text offer__text--error">Попробуйте использовать другие параметры для расчёта. </p>
               </div> :
@@ -704,11 +649,11 @@ function Calculator() {
 
                 <div className="offer__wrapper">
                   <p className="offer__number">
-                    {data.interestRate === MOUNTLY_INTEREST_RATE.highest && '16,00%'}
-                    {data.interestRate === MOUNTLY_INTEREST_RATE.high && '15,00%'}
-                    {data.interestRate === MOUNTLY_INTEREST_RATE.middle && '9,40%'}
-                    {data.interestRate === MOUNTLY_INTEREST_RATE.low && '8,50%'}
-                    {data.interestRate === MOUNTLY_INTEREST_RATE.lowest && '3,50%'}
+                    {data.interestRate === MountlyInterestRate.HIGHEST && '16,00%'}
+                    {data.interestRate === MountlyInterestRate.HIGH && '15,00%'}
+                    {data.interestRate === MountlyInterestRate.MIDDLE && '9,40%'}
+                    {data.interestRate === MountlyInterestRate.LOW && '8,50%'}
+                    {data.interestRate === MountlyInterestRate.LOWEST && '3,50%'}
                   </p>
                   <p className="offer__text">Процентная ставка </p>
                 </div>
@@ -719,7 +664,7 @@ function Calculator() {
                 </div>
 
                 <div className="offer__wrapper">
-                  <p className="offer__number">{getNumberWithSpaces(Math.round(data.monthlyPayment / 45 * 100))} рублей </p>
+                  <p className="offer__number">{getNumberWithSpaces(Math.round(data.monthlyPayment / PERCENTAGE_INCOME * 100))} рублей </p>
                   <p className="offer__text">Необходимый доход </p>
                 </div>
 
@@ -742,14 +687,14 @@ function Calculator() {
                 <span className="calculator__data-header">Цель кредита</span>
 
                 <span className="calculator__data-value">
-                  {data.creditTarget === loanType.mortgage && 'Ипотека'}
-                  {data.creditTarget === loanType.carLending && 'Автокредит'}
+                  {data.creditTarget === LoanType.MORTGAGE && 'Ипотека'}
+                  {data.creditTarget === LoanType.CAR_LENDING && 'Автокредит'}
                 </span>
               </li>
               <li className="calculator__data-item">
                 <span className="calculator__data-header">
-                  {data.creditTarget === loanType.mortgage && 'Стоимость недвижимости'}
-                  {data.creditTarget === loanType.carLending && 'Стоимость автомобиля'}
+                  {data.creditTarget === LoanType.MORTGAGE && 'Стоимость недвижимости'}
+                  {data.creditTarget === LoanType.CAR_LENDING && 'Стоимость автомобиля'}
                 </span>
 
                 <span className="calculator__data-value">{getNumberWithSpaces(data.propertyValue)} рублей</span>
