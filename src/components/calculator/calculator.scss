@@ -660,6 +660,7 @@
 
 .calculator__popup-wrapper {
   position: fixed;
+  z-index: 10;
   width: 100vw;
   height: 100vh;
   overflow-y: hidden;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ThanksPopus ({onCloseClick}) {
+function ThanksPopup ({onCloseClick}) {
   return (
     <div className="calculator__popup-wrapper">
       <div className="thanks popup">
@@ -16,8 +16,8 @@ function ThanksPopus ({onCloseClick}) {
   );
 }
 
-ThanksPopus.propTypes = {
+ThanksPopup.propTypes = {
   onCloseClick: PropTypes.func.isRequired,
 };
 
-export default ThanksPopus;
+export default ThanksPopup;

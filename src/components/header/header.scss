@@ -58,3 +58,15 @@
   color: #1F1E25;
   letter-spacing: 0;
 }
+
+.header__popup-wrapper {
+  position: fixed;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(0,0,0,.3);
+}

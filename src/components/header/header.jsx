@@ -1,6 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
+import LoginPopup from '../popups/login-popup/login-popup';
 
 function Header() {
+  const [popupShown, setPopupShown] = useState(false);
+
+  const handleEscKeydown = (evt) => {
+    if (evt.key === ('Escape' || 'Esc')) {
+      evt.preventDefault();
+
+      setPopupShown(false);
+
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleEscKeydown);
+    }
+  };
+
+  const handleLoginClick = (evt) => {
+    evt.preventDefault();
+
+    setPopupShown(true);
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleEscKeydown);
+  };
+
+  const handlePopupClose = () => {
+    setPopupShown(false);
+
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'unset';
+    window.removeEventListener('keydown', handleEscKeydown);
+  };
+
   return(
     <header className="header">
       <div className="header__wrapper container">
@@ -26,7 +58,7 @@ function Header() {
             </li>
           </ul>
 
-          <a className="header__user-link link" href="/" aria-label="Авторизация">
+          <a className="header__user-link link" href="/" aria-label="Авторизация" onClick={handleLoginClick}>
             <svg viewBox="0 0 20 22" width="20" height="22">
               <use xlinkHref="#user-login"></use>
             </svg>
@@ -35,6 +67,8 @@ function Header() {
           </a>
         </nav>
       </div>
+
+      {popupShown && <LoginPopup onCloseClick={handlePopupClose} />}
     </header>
   );
 }

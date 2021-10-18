@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import ThanksPopus from '../popups/thanks-popup/thanks-popup';
+import ThanksPopup from '../popups/thanks-popup/thanks-popup';
 
 import {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, LoanType, Mortgage, CarLending, MountlyInterestRate} from '../../const';
 import {getNumberFromString, getNumberWithSpaces, getMonthlyPayment} from '../../utils';
@@ -521,12 +521,18 @@ function Calculator() {
       evt.preventDefault();
 
       setPopupShown(false);
+
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'unset';
       window.removeEventListener('keydown', handleEscKeydown);
     }
   };
 
   const handlePopupClose = (evt) => {
     setPopupShown(false);
+
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'unset';
     window.removeEventListener('keydown', handleEscKeydown);
   };
 
@@ -546,6 +552,9 @@ function Calculator() {
 
     setFormShown(!formShown);
     setPopupShown(!popupShown);
+
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleEscKeydown);
   };
 
@@ -722,7 +731,7 @@ function Calculator() {
           : ''}
       </form>
 
-      {popupShown && <ThanksPopus onCloseClick={handlePopupClose} />}
+      {popupShown && <ThanksPopup onCloseClick={handlePopupClose} />}
     </section>
   );
 }
