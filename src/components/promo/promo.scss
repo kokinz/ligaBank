@@ -3,6 +3,7 @@
 }
 
 .slider__item {
+  display: none;
   min-height: 400px;
 
   &--credit {
@@ -21,6 +22,10 @@
 
   &--branch {
     background: url('../../img/branch.png') top left 100% no-repeat;
+  }
+
+  &--show {
+    display: block;
   }
 }
 
@@ -100,8 +105,6 @@
 
   border-radius: 50%;
   background-color: #2028B6;
-
-  cursor: pointer;
 
   &--active {
     background-color: #F6F7FF;

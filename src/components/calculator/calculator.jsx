@@ -559,7 +559,7 @@ function Calculator() {
   };
 
   return(
-    <section className="calculator container">
+    <section className="calculator container" id="creditCalculator">
       <h2 className="calculator__header">Кредитный калькулятор</h2>
 
       <form className="calculator__form" action="https://echo.htmlacademy.ru/" onSubmit={handleFormSubmit}>
