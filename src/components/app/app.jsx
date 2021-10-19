@@ -10,9 +10,9 @@ function App() {
     <>
       <Header />
 
-      <Main />
+      {/* <Main />
 
-      <Footer />
+      <Footer /> */}
     </>
   );
 }

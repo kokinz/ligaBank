@@ -44,6 +44,11 @@
     width: 768px;
     padding: 0 45px;
   }
+
+  @media (max-width: $tablet-width) {
+    width: 320px;
+    padding: 0 15px;
+  }
 }
 
 .link {

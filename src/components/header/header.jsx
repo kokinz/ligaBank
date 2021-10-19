@@ -3,6 +3,7 @@ import LoginPopup from '../popups/login-popup/login-popup';
 
 function Header() {
   const [popupShown, setPopupShown] = useState(false);
+  const [menuShown, setMenuShown] = useState(false);
 
   const handleEscKeydown = (evt) => {
     if (evt.key === ('Escape' || 'Esc')) {
@@ -33,8 +34,20 @@ function Header() {
     window.removeEventListener('keydown', handleEscKeydown);
   };
 
+  const handleMenuButtonClick = (evt) => {
+    evt.preventDefault();
+
+    setMenuShown(true);
+  };
+
+  const handleMenuButtonClose = (evt) => {
+    evt.preventDefault();
+
+    setMenuShown(false);
+  };
+
   return(
-    <header className="header">
+    <header className={`header ${menuShown ? 'header--menu' : ''}`}>
       <div className="header__wrapper container">
         <a className="header__logo link" href="/" aria-label="Лига Банк">
           <svg className="header__logo-image header__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
@@ -43,10 +56,13 @@ function Header() {
           <svg className="header__logo-image header__logo-image--tablet" viewBox="0 0 134 24" width={134} height={24}>
             <use xlinkHref="#logo-tablet" />
           </svg>
+          <svg className="header__logo-image header__logo-image--mobile" viewBox="0 0 116 19" width={116} height={19}>
+            <use xlinkHref="#logo-mobile" />
+          </svg>
         </a>
 
-        <nav className="header__nav nav">
-          <ul className="header__list list">
+        <nav className={`header__nav nav ${menuShown ? 'header__nav--menu' : ''}`}>
+          <ul className={`header__list list ${menuShown ? 'header__list--menu' : ''}`}>
             <li className="header__item">
               <a className="header__link link" href="/">Услуги</a>
             </li>
@@ -61,13 +77,16 @@ function Header() {
             </li>
           </ul>
 
-          <a className="header__user-link link" href="/" aria-label="Авторизация" onClick={handleLoginClick}>
-            <svg viewBox="0 0 20 22" width="20" height="22">
+          <a className={`header__user-link link ${menuShown ? 'header__user-link--menu' : ''}`} href="/" aria-label="Авторизация" onClick={handleLoginClick}>
+            <svg className={`header__user-image ${menuShown ? 'header__user-image--menu' : ''}`} viewBox="0 0 20 22" width="20" height="22">
               <use xlinkHref="#user-login"></use>
             </svg>
 
             Войти в Интернет-банк
           </a>
+
+          <button className={`header__menu-button button ${menuShown ? 'header__menu-button--menu' : ''}`} onClick={handleMenuButtonClick}>Меню</button>
+          <button className={`header__menu-close button ${menuShown ? 'header__menu-close--menu' : ''}`} onClick={handleMenuButtonClose}>Закрыть Меню</button>
         </nav>
       </div>
 
