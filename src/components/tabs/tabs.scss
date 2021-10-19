@@ -1,9 +1,22 @@
 .tabs {
+  position: relative;
   margin-top: 60px;
+
+  @media (max-width: $desktop-width) {
+    margin-top: 0;
+    min-height: 380px;
+    padding-top: 55px;
+
+    background-color: #F6F7FF;
+  }
 }
 
 .tabs__list {
   display: flex;
+
+  @media (max-width: $desktop-width) {
+    display: none;
+  }
 }
 
 .tabs__item {
@@ -63,6 +76,38 @@
   width: 20px;
 }
 
+.tabs__slider-controls {
+  position: absolute;
+
+  display: none;
+  justify-content: space-between;
+
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  width: 56px;
+  height: 8px;
+
+  @media (max-width: $desktop-width) {
+    display: flex;
+    bottom: 15px;
+  }
+}
+
+.tabs__slider-control {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background-color: #2028B6;
+
+  &--active {
+    background-color: #E0E0E0;
+  }
+}
+
 .tab {
   display: flex;
   flex-direction: column;
@@ -76,24 +121,49 @@
     background-image: url(../../img/piggybank.png);
     background-repeat: no-repeat;
     background-position: right 135px bottom 60px;
+
+    @media (max-width: $desktop-width) {
+      background-image: url(../../img/piggybank-tablet.png);
+      background-position: right 0 bottom 60px;
+    }
   }
 
   &--credits {
     background-image: url(../../img/car.png);
     background-repeat: no-repeat;
     background-position: right 135px bottom 54px;
+
+    @media (max-width: $desktop-width) {
+      background-image: url(../../img/car-tablet.png);
+      background-position: right 0 bottom 49px;
+    }
   }
 
   &--insurance {
     background-image: url(../../img/lock.png);
     background-repeat: no-repeat;
     background-position: right 135px bottom 49px;
+
+    @media (max-width: $desktop-width) {
+      background-image: url(../../img/lock-tablet.png);
+      background-position: right 0 bottom 39px;
+    }
   }
 
   &--online-services {
     background-image: url(../../img/mobile.png);
     background-repeat: no-repeat;
     background-position: right 135px bottom 52px;
+
+    @media (max-width: $desktop-width) {
+      background-image: url(../../img/mobile-tablet.png);
+      background-position: right 0 bottom 45px;
+    }
+  }
+
+  @media (max-width: $desktop-width) {
+    padding-top: 0;
+    padding-left: 0;
   }
 }
 
@@ -115,6 +185,22 @@
   &--credits {
     width: 290px;
   }
+
+  @media (max-width: $desktop-width) {
+    width: 255px;
+    margin-bottom: 23px;
+
+    font-size: 18px;
+    line-height: 25px;
+
+    &--insurance {
+      width: 295px;
+    }
+
+    &--online-services {
+      width: 344px;
+    }
+  }
 }
 
 .tab__list {
@@ -123,6 +209,11 @@
   line-height: 23px;
 
   color: #1F1E25;
+
+  @media (max-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 21px;
+  }
 }
 
 .tab__item {
@@ -148,6 +239,14 @@
   &--online-services {
     width: 340px;
   }
+
+  @media (max-width: $desktop-width) {
+    width: 360px;
+
+    &--online-services {
+      width: 325px;
+    }
+  }
 }
 
 .tab__button {
@@ -162,6 +261,12 @@
 
   color: #F6F7FF;
   background-color: #2C36F2;
+
+  @media (max-width: $desktop-width) {
+    margin-top: 15px;
+    min-height: 48px;
+    height: 48px;
+  }
 }
 
 .tab__description {
@@ -174,6 +279,13 @@
   line-height: 25px;
 
   color: #1F1E25;
+
+  @media (max-width: $desktop-width) {
+    width: 330px;
+
+    font-size: 16px;
+    line-height: 22px;
+  }
 }
 
 .tabs__description-link {
@@ -183,4 +295,9 @@
   text-decoration-line: underline;
 
   color: #1F1E25;
+
+  @media (max-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 22px;
+  }
 }

@@ -11,9 +11,9 @@ function Main() {
 
       <Promo />
 
-      {/* <Tabs />
+      <Tabs />
 
-      <Calculator />
+      {/* <Calculator />
 
       <Map /> */}
     </main>

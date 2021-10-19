@@ -91,10 +91,18 @@ function Tabs() {
           </li>
         ))}
       </ul>
+
       {activeTab === Tab.CONTRIBUTIONS.id && <ContributionsTab />}
       {activeTab === Tab.CREDITS.id && <CreditsTab />}
       {activeTab === Tab.INSURANCE.id && <InsuranceTab />}
       {activeTab === Tab.ONLINE_SERVICES.id && <OnlineServicesTab />}
+
+      <ul className="tabs__slider-controls list">
+        <li className={`tabs__slider-control ${activeTab === Tab.CONTRIBUTIONS.id ? 'tabs__slider-control--active' : ''}`}></li>
+        <li className={`tabs__slider-control ${activeTab === Tab.CREDITS.id ? 'tabs__slider-control--active' : ''}`}></li>
+        <li className={`tabs__slider-control ${activeTab === Tab.INSURANCE.id ? 'tabs__slider-control--active' : ''}`}></li>
+        <li className={`tabs__slider-control ${activeTab === Tab.ONLINE_SERVICES.id ? 'tabs__slider-control--active' : ''}`}></li>
+      </ul>
     </section>
   );
 

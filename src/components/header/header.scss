@@ -64,6 +64,10 @@
   margin-right: 24px;
   padding-top: 37px;
 
+  @media (max-width: $max-width) {
+    margin-right: 15px;
+  }
+
   @media (max-width: $desktop-width) {
     padding-top: 30px;
     margin-right: 19px;
