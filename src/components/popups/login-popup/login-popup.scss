@@ -8,6 +8,11 @@
   background: #F6F7FF;
   border: 4px solid #2C36F2;
   border-radius: 0;
+
+  @media (max-width: $desktop-width) {
+    width: 678px;
+    padding: 55px 84px;
+  }
 }
 
 .login__header {
@@ -96,6 +101,10 @@
 
   color: #F6F7FF;
   background-color: #2C36F2;
+
+  @media (max-width: $desktop-width) {
+    width: 502px;
+  }
 }
 
 .login__close-button {
@@ -138,5 +147,9 @@
     border-radius: 1px;
     background-color: #1F1E25;
     transform: rotate(-45deg);
+  }
+
+  @media (max-width: $desktop-width) {
+    right: 72px;
   }
 }

@@ -690,6 +690,10 @@
   @media (max-width: $desktop-width) {
     width: 100%;
   }
+
+  @media (max-width: $desktop-width) {
+    width: 375px;
+  }
 }
 
 .offer__wrapper {

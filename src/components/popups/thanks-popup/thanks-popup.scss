@@ -4,6 +4,10 @@
 
   background: #F6F7FF;
   border-radius: 4px;
+
+  @media (max-width: $desktop-width) {
+    width: 678px;
+  }
 }
 
 .thanks__header {
@@ -70,5 +74,10 @@
     border-radius: 1px;
     background-color: #1F1E25;
     transform: rotate(-45deg);
+  }
+
+  @media (max-width: $desktop-width) {
+    top: 17px;
+    right: 19px;
   }
 }
