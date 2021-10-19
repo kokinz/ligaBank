@@ -12,6 +12,14 @@
   line-height: 57px;
 
   color: #1F1E25;
+
+  @media (max-width: $desktop-width) {
+    margin-top: -1px;
+    margin-bottom: 32px;
+
+    font-size: 32px;
+    line-height: 45px;
+  }
 }
 
 .map__img {

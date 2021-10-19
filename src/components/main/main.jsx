@@ -13,9 +13,9 @@ function Main() {
 
       <Tabs />
 
-      {/* <Calculator />
+      <Calculator />
 
-      <Map /> */}
+      <Map />
     </main>
   );
 }

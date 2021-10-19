@@ -187,11 +187,15 @@
   }
 
   @media (max-width: $desktop-width) {
-    width: 255px;
+    width: 304px;
     margin-bottom: 23px;
 
     font-size: 18px;
     line-height: 25px;
+
+    &--credits {
+      width: 268px;
+    }
 
     &--insurance {
       width: 295px;

@@ -590,7 +590,7 @@ function Calculator() {
         {data.creditTarget ?
           <>
             <fieldset className="calculator__fieldset calculator__fieldset--second-step">
-              <legend className="calculator__legend calculator__legend">Шаг 2. Введите параметры кредита</legend>
+              <legend className="calculator__legend calculator__legend--second-step">Шаг 2. Введите параметры кредита</legend>
 
               <label className="calculator__label" htmlFor="propertyValue">
                 {data.creditTarget === LoanType.MORTGAGE && 'Стоимость недвижимости'}
@@ -610,7 +610,7 @@ function Calculator() {
               {data.creditTarget === LoanType.CAR_LENDING && <p className="calculator__prompt">От {getNumberWithSpaces(CarLending.MIN)} &nbsp;до {getNumberWithSpaces(CarLending.MAX)} рублей</p>}
 
 
-              <label className="calculator__label" htmlFor="initialFee">Первоначальный взнос</label>
+              <label className="calculator__label calculator__label--initial-fee" htmlFor="initialFee">Первоначальный взнос</label>
               <div className="calculator__input-wrapper">
                 <input className="calculator__input" ref={initialFee} type="text" id="initialFee" defaultValue={`${getNumberWithSpaces(data.propertyValue / setting.minInitialFee)} рублей`} onChange={handleInitialFeeType} />
               </div>
@@ -618,7 +618,7 @@ function Calculator() {
               <input className="calculator__range" id="initialFeeRange" ref={initialFeeRange} type="range" min={100 / setting.minInitialFee} max="100" step="5" defaultValue={100 / setting.minInitialFee} onChange={handleInitialFeeChange} />
               <label htmlFor="initialFeeRange" className="calculator__range-text">{100 / setting.minInitialFee}%</label>
 
-              <label className="calculator__label" htmlFor="loanTerms">Срок кредитования</label>
+              <label className="calculator__label calculator__label--loan-terms" htmlFor="loanTerms">Срок кредитования</label>
               <div className="calculator__input-wrapper">
                 <input className="calculator__input calculator__input--loan-terms" ref={loanTerms} type="text" id="loanTerms" defaultValue="5 лет" onChange={handleLoanTermsType} />
               </div>
