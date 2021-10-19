@@ -26,6 +26,8 @@
 
   &--show {
     display: block;
+    opacity: 0;
+    animation: show 4s 1;
   }
 }
 
@@ -108,5 +110,27 @@
 
   &--active {
     background-color: #F6F7FF;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0.1;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.1;
   }
 }
