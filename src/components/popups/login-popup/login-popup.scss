@@ -13,6 +13,12 @@
     width: 678px;
     padding: 55px 84px;
   }
+
+  @media (max-width: $tablet-width) {
+    width: 290px;
+    padding: 0 16px;
+    height: 455px;
+  }
 }
 
 .login__header {
@@ -20,6 +26,12 @@
   padding: 0;
   margin-bottom: 33px;
   margin-left: -1px;
+
+  @media (max-width: $tablet-width) {
+    margin-bottom: 0;
+    margin-top: 45px;
+    margin-left: -6px;
+  }
 }
 
 .login__label {
@@ -32,6 +44,11 @@
   line-height: 22px;
 
   color: #394959;
+
+  @media (max-width: $tablet-width) {
+    margin-top: 23px;
+    margin-bottom: 3px;
+  }
 }
 
 .login__input-wrapper {
@@ -71,6 +88,10 @@
 
   border: none;
   background-color: transparent;
+
+  @media (max-width: $tablet-width) {
+    right: -4px;
+  }
 }
 
 .login__forgotten-password {
@@ -90,6 +111,15 @@
 
   color: #707C87;
   background-color: transparent;
+
+  @media (max-width: $tablet-width) {
+    position: absolute;
+    bottom: -114px;
+    left: 54px;
+
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 .login__button {
@@ -104,6 +134,15 @@
 
   @media (max-width: $desktop-width) {
     width: 502px;
+  }
+
+  @media (max-width: $tablet-width) {
+    width: 250px;
+    margin-top: 29px;
+    height: 51px;
+
+    font-size: 14px;
+    line-height: 16px;
   }
 }
 
@@ -151,5 +190,18 @@
 
   @media (max-width: $desktop-width) {
     right: 72px;
+  }
+
+  @media (max-width: $tablet-width) {
+    top: 31px;
+    right: 0px;
+
+    &::before {
+      width: 18px;
+    }
+
+    &::after {
+      width: 18px;
+    }
   }
 }

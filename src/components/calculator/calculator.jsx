@@ -54,6 +54,10 @@ function Calculator() {
       return;
     }
 
+    if (evt.target.id === 'default') {
+      details.current.open = !details.current.open;
+    }
+
     if (evt.target.title === LoanType.MORTGAGE || evt.target.title === LoanType.CAR_LENDING) {
       if (evt.target.title === LoanType.MORTGAGE) {
         setData({

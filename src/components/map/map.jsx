@@ -7,6 +7,7 @@ function Map() {
       <h2 className="map__header">Отделения Лига Банка</h2>
 
       <picture>
+        <source media="(max-width: 767px)" srcSet="/img/map-mobile.png" />
         <source media="(max-width: 1023px)" srcSet="/img/map-tablet.png" />
         <img className="map__img" src="/img/map.png" alt="Карта" />
       </picture>

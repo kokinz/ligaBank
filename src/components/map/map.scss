@@ -1,5 +1,13 @@
 .map {
   margin-bottom: 106px;
+
+  @media (max-width: $tablet-width) {
+    padding: 0;
+  }
+
+  @media (max-width: $tablet-width) {
+    margin-bottom: 56px;
+  }
 }
 
 .map__header {
@@ -19,6 +27,14 @@
 
     font-size: 32px;
     line-height: 45px;
+  }
+
+  @media (max-width: $tablet-width) {
+    margin-bottom: 27px;
+    margin-left: 15px;
+
+    font-size: 22px;
+    line-height: 31px;
   }
 }
 

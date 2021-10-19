@@ -12,6 +12,9 @@ function Footer() {
             <svg className="footer__logo-image footer__logo-image--tablet" viewBox="0 0 134 24" width={134} height={24}>
               <use xlinkHref="#logo-tablet" />
             </svg>
+            <svg className="footer__logo-image footer__logo-image--mobile" viewBox="0 0 116 19" width={116} height={19}>
+              <use xlinkHref="#logo-mobile" />
+            </svg>
           </a>
 
           <p className="footer__address">
