@@ -11,11 +11,11 @@ function Main() {
 
       <Promo />
 
-      <Tabs />
+      {/* <Tabs />
 
       <Calculator />
 
-      <Map />
+      <Map /> */}
     </main>
   );
 }

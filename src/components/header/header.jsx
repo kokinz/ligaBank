@@ -40,6 +40,9 @@ function Header() {
           <svg className="header__logo-image header__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
             <use xlinkHref="#logo" />
           </svg>
+          <svg className="header__logo-image header__logo-image--tablet" viewBox="0 0 134 24" width={134} height={24}>
+            <use xlinkHref="#logo-tablet" />
+          </svg>
         </a>
 
         <nav className="header__nav nav">

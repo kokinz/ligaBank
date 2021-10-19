@@ -26,8 +26,31 @@
 
   &--show {
     display: block;
-    opacity: 0;
-    animation: show 4s 1;
+    // opacity: 0;
+    // animation: show 4s 1;
+  }
+
+  @media (max-width: $desktop-width) {
+    min-height: 300px;
+    height: 300px;
+
+    &--credit {
+      background:
+      url('../../img/cards-tablet.png') top 38.4px right 15.3%/356px auto no-repeat,
+      linear-gradient(180.24deg, rgba(32, 39, 179, 0) 36.31%, #2027B3 99.79%) bottom left/11% 100% no-repeat,
+      linear-gradient(183.47deg, rgba(56, 65, 255, 0) 66.3%, #3841FF 97.14%) bottom left 11%/12.4% 100% no-repeat,
+      linear-gradient(183.47deg, rgba(56, 65, 255, 0) 27.26%, #3841FF 97.14%) bottom left 72.8%/19.8% 60% no-repeat,
+      linear-gradient(180.24deg, rgba(32, 39, 179, 0) 32.89%, #2027B3 99.79%) bottom left 99.9%/21.8% 100% no-repeat,
+      linear-gradient(#2C36F2, #2C36F2) top left/1366px 400px no-repeat;
+    }
+
+    &--confidence {
+      background: url('../../img/confidence-tablet.png') top left 100% no-repeat;
+    }
+
+    &--branch {
+      background: url('../../img/branch-tablet.png') top left 100% no-repeat;
+    }
   }
 }
 
@@ -42,12 +65,21 @@
 
   color: #F6F7FF;
 
+
   &--confidence {
     color: #1F1E25;
   }
 
   &--branch {
     color: #1F1E25;
+  }
+
+  @media (max-width: $desktop-width) {
+    padding-top: 65px;
+    padding-left: 40px;
+
+    font-size: 46px;
+    line-height: 54px;
   }
 }
 
@@ -68,6 +100,14 @@
   &--branch {
     color: #2B3C4F;
   }
+
+  @media (max-width: $desktop-width) {
+    padding-top: 6px;
+    padding-left: 40px;
+
+    font-size: 18px;
+    line-height: 21px;
+  }
 }
 
 .promo__link {
@@ -84,6 +124,18 @@
     color: #F6F7FF;
     background-color: #2C36F2;
   }
+
+  @media (max-width: $desktop-width) {
+    min-width: 206px;
+    min-height: 48px;
+    width: 206px;
+    height: 48px;
+    margin-top: 30px;
+    margin-left: 41px;
+
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
 
 .promo__slider-controls {
@@ -99,6 +151,10 @@
 
   width: 40px;
   height: 8px;
+
+  @media (max-width: $desktop-width) {
+    bottom: 15px;
+  }
 }
 
 .promo__slider-control {

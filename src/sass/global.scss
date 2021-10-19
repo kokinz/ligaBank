@@ -39,6 +39,11 @@
   @media (max-width: $max-width) {
     padding: 0 6.9%;
   }
+
+  @media (max-width: $desktop-width) {
+    width: 768px;
+    padding: 0 45px;
+  }
 }
 
 .link {
@@ -69,6 +74,13 @@
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 0.1px;
+
+  color: #1F1E25;
+
+  @media (max-width: $desktop-width) {
+    font-size: 14px;
+    line-height: 16px;
+  }
 }
 
 .list {
