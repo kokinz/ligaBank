@@ -126,6 +126,7 @@ function Calculator() {
       }
 
       details.current.open = false;
+      setInputError(false);
     }
   };
 
@@ -595,7 +596,7 @@ function Calculator() {
                 {data.creditTarget === LoanType.MORTGAGE && 'Стоимость недвижимости'}
                 {data.creditTarget === LoanType.CAR_LENDING && 'Стоимость автомобиля'}
               </label>
-              <div className="calculator__input-wrapper calculator__input-wrapper--rubles">
+              <div className="calculator__input-wrapper">
                 <button className="calculator__button-minus button" type="button" onClick={handlePropertyValueMinus}>Минус</button>
 
                 <input className={inputError ? 'calculator__input calculator__input--error' : 'calculator__input'} ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" onChange={handlePropertyValueType} />
@@ -610,13 +611,17 @@ function Calculator() {
 
 
               <label className="calculator__label" htmlFor="initialFee">Первоначальный взнос</label>
-              <input className="calculator__input" ref={initialFee} type="text" id="initialFee" defaultValue={`${getNumberWithSpaces(data.propertyValue / setting.minInitialFee)} рублей`} onChange={handleInitialFeeType} />
+              <div className="calculator__input-wrapper">
+                <input className="calculator__input" ref={initialFee} type="text" id="initialFee" defaultValue={`${getNumberWithSpaces(data.propertyValue / setting.minInitialFee)} рублей`} onChange={handleInitialFeeType} />
+              </div>
 
               <input className="calculator__range" id="initialFeeRange" ref={initialFeeRange} type="range" min={100 / setting.minInitialFee} max="100" step="5" defaultValue={100 / setting.minInitialFee} onChange={handleInitialFeeChange} />
               <label htmlFor="initialFeeRange" className="calculator__range-text">{100 / setting.minInitialFee}%</label>
 
               <label className="calculator__label" htmlFor="loanTerms">Срок кредитования</label>
-              <input className="calculator__input calculator__input--loan-terms" ref={loanTerms} type="text" id="loanTerms" defaultValue="5 лет" onChange={handleLoanTermsType} />
+              <div className="calculator__input-wrapper">
+                <input className="calculator__input calculator__input--loan-terms" ref={loanTerms} type="text" id="loanTerms" defaultValue="5 лет" onChange={handleLoanTermsType} />
+              </div>
 
               <input className="calculator__range calculator__range--loan-terms" id="loanTermsRange" ref={loanTermsRange} type="range" min={setting.minTerm} max={setting.maxTerm} step="1" defaultValue="5" onChange={handleLoanTermsChange} />
               <label htmlFor="loanTermsRange" className="calculator__range-text">{setting.minTerm === 1 ? `${setting.minTerm} год` : `${setting.minTerm} лет`}</label>

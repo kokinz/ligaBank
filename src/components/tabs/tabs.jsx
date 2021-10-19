@@ -19,8 +19,14 @@ function Tabs() {
   const handleMouseClick = (evt) => {
     evt.preventDefault();
 
-    if (!evt.target.innerText) {
+    if (evt.target.localName === 'use') {
       setActiveTab(parseInt(evt.target.parentNode.parentNode.id, 10));
+
+      return;
+    }
+
+    if (evt.target.localName === 'svg') {
+      setActiveTab(parseInt(evt.target.parentNode.id, 10));
 
       return;
     }
@@ -48,7 +54,7 @@ function Tabs() {
       return;
     }
 
-    if (xDiff > 0) { ////right
+    if (xDiff > 0) {
       if (activeTab === Tab.CONTRIBUTIONS.id) {
         setActiveTab(Tab.ONLINE_SERVICES.id);
 
@@ -59,7 +65,7 @@ function Tabs() {
       return;
     }
 
-    if (xDiff < 0) { ////left
+    if (xDiff < 0) {
       if (activeTab === Tab.ONLINE_SERVICES.id) {
         setActiveTab(Tab.CONTRIBUTIONS.id);
 

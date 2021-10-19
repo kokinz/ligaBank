@@ -60,11 +60,19 @@
   padding-left: 81px;
   padding-top: 55px;
   list-style: none;
+
+  @media (max-width: $max-width) {
+    padding-left: 15px;
+  }
 }
 
 .footer__item {
   width: 200px;
   margin-bottom: 9px;
+
+  @media (max-width: $max-width) {
+    width: 150px;
+  }
 }
 
 .footer__link {
@@ -83,6 +91,11 @@
   &--mobile {
     margin-right: 62px;
     padding-top: 59px;
+  }
+
+  @media (max-width: $max-width) {
+    margin-left: 5px;
+    margin-right: 15px;
   }
 }
 
@@ -105,12 +118,20 @@
     padding-top: 1px;
     width: 73px;
   }
+
+  @media (max-width: $max-width) {
+    padding-left: 0;
+  }
 }
 
 .footer__phone-description {
   margin-top: 0;
   padding-left: 52px;
   width: 167px;
+
+  @media (max-width: $max-width) {
+    padding-left: 0;
+  }
 }
 
 .footer__social {
@@ -124,4 +145,8 @@
   height: 16px;
 
   list-style: none;
+
+  @media (max-width: $max-width) {
+    margin-left: 5px;
+  }
 }
