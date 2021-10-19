@@ -101,7 +101,7 @@ function Promo() {
       <ul className="promo__slider-controls list">
         <li className={`promo__slider-control ${activeSlide === Slide.CREDIT ? 'promo__slider-control--active' : ''}`}></li>
         <li className={`promo__slider-control ${activeSlide === Slide.CONFIDENCE ? 'promo__slider-control--active' : ''}`}></li>
-        <li className={`promo__slider-control ${activeSlide === Slide.BRANCH ? 'promo__slider-control--active' : ''}`}></li>
+        <li className={`promo__slider-control promo__slider-control--branch ${activeSlide === Slide.BRANCH ? 'promo__slider-control--active' : ''}`}></li>
       </ul>
     </section>
   );

@@ -169,6 +169,10 @@
   }
 }
 
+.promo__slider-control--active.promo__slider-control--branch {
+  background-color: #E0E0E0;
+}
+
 @keyframes show {
   0% {
     opacity: 0.1;
