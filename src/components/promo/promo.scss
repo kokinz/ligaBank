@@ -26,8 +26,6 @@
 
   &--show {
     display: block;
-    // opacity: 0;
-    // animation: show 4s 1;
   }
 
   @media (max-width: $desktop-width) {
@@ -50,6 +48,25 @@
 
     &--branch {
       background: url('../../img/branch-tablet.png') top left 100% no-repeat;
+    }
+  }
+
+  @media (max-width: $tablet-width) {
+    min-height: 226px;
+    height: 226px;
+
+    &--credit {
+      background:
+      url('../../img/cards-mobile.png') top 29px right 0/105px auto no-repeat,
+      linear-gradient(#2C36F2, #2C36F2) top left/1366px 400px no-repeat;
+    }
+
+    &--confidence {
+      background: url('../../img/confidence-mobile.png') top left 100% no-repeat;
+    }
+
+    &--branch {
+      background: url('../../img/branch-mobile.png') top left 100% no-repeat;
     }
   }
 }
@@ -81,6 +98,14 @@
     font-size: 46px;
     line-height: 54px;
   }
+
+  @media (max-width: $tablet-width) {
+    padding-top: 39px;
+    padding-left: 0px;
+
+    font-size: 38px;
+    line-height: 45px;
+  }
 }
 
 .promo__description {
@@ -95,6 +120,10 @@
 
   &--confidence {
     color: #2B3C4F;
+
+    @media (max-width: $tablet-width) {
+      width: 150px;
+    }
   }
 
   &--branch {
@@ -107,6 +136,14 @@
 
     font-size: 18px;
     line-height: 21px;
+  }
+
+  @media (max-width: $tablet-width) {
+    padding-top: 6px;
+    padding-left: 0px;
+
+    font-size: 16px;
+    line-height: 19px;
   }
 }
 
@@ -136,6 +173,18 @@
     font-size: 16px;
     line-height: 19px;
   }
+
+  @media (max-width: $tablet-width) {
+    margin-top: 26px;
+    margin-left: 0;
+    min-width: 188px;
+    min-height: 43px;
+    width: 188px;
+    height: 43px;
+
+    font-size: 14px;
+    line-height: 16px;
+  }
 }
 
 .promo__slider-controls {
@@ -155,6 +204,11 @@
   @media (max-width: $desktop-width) {
     bottom: 15px;
   }
+
+  @media (max-width: $tablet-width) {
+    width: 30px;
+    bottom: 8px;
+  }
 }
 
 .promo__slider-control {
@@ -166,6 +220,11 @@
 
   &--active {
     background-color: #F6F7FF;
+  }
+
+  @media (max-width: $tablet-width) {
+    width: 6px;
+    height: 6px;
   }
 }
 

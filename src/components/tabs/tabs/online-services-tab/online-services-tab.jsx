@@ -22,7 +22,7 @@ function OnlineServicesTab() {
         </li>
       </ul>
 
-      <button className="tab__button button">Узнать подробнее</button>
+      <button className="tab__button tab__button--online-services button">Узнать подробнее</button>
     </section>
   );
 }

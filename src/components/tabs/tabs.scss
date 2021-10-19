@@ -9,6 +9,11 @@
 
     background-color: #F6F7FF;
   }
+
+  @media (max-width: $tablet-width) {
+    min-height: 362px;
+    padding-right: 0;
+  }
 }
 
 .tabs__list {
@@ -94,6 +99,11 @@
     display: flex;
     bottom: 15px;
   }
+
+  @media (max-width: $tablet-width) {
+    bottom: 8px;
+    width: 42px;
+  }
 }
 
 .tabs__slider-control {
@@ -105,6 +115,11 @@
 
   &--active {
     background-color: #E0E0E0;
+  }
+
+  @media (max-width: $tablet-width) {
+    width: 6px;
+    height: 6px;
   }
 }
 
@@ -126,6 +141,11 @@
       background-image: url(../../img/piggybank-tablet.png);
       background-position: right 0 bottom 60px;
     }
+
+    @media (max-width: $tablet-width) {
+      background-image: url(../../img/piggybank-mobile.png);
+      background-position: right 0 bottom 151px;
+    }
   }
 
   &--credits {
@@ -136,6 +156,11 @@
     @media (max-width: $desktop-width) {
       background-image: url(../../img/car-tablet.png);
       background-position: right 0 bottom 49px;
+    }
+
+    @media (max-width: $tablet-width) {
+      background-image: url(../../img/car-mobile.png);
+      background-position: right 0 bottom 122px;
     }
   }
 
@@ -148,6 +173,11 @@
       background-image: url(../../img/lock-tablet.png);
       background-position: right 0 bottom 39px;
     }
+
+    @media (max-width: $tablet-width) {
+      background-image: url(../../img/lock-mobile.png);
+      background-position: right 0 bottom 115px;
+    }
   }
 
   &--online-services {
@@ -158,6 +188,11 @@
     @media (max-width: $desktop-width) {
       background-image: url(../../img/mobile-tablet.png);
       background-position: right 0 bottom 45px;
+    }
+
+    @media (max-width: $tablet-width) {
+      background-image: url(../../img/mobile-mobile.png);
+      background-position: right 0 bottom 150px;
     }
   }
 
@@ -205,6 +240,25 @@
       width: 344px;
     }
   }
+
+  @media (max-width: $tablet-width) {
+    font-size: 16px;
+    line-height: 22px;
+
+    margin-bottom: 21px;
+
+    &--credits {
+      width: 230px;
+    }
+
+    &--insurance {
+      width: 265px;
+    }
+
+    &--online-services {
+      width: 242px;
+    }
+  }
 }
 
 .tab__list {
@@ -218,6 +272,11 @@
     font-size: 16px;
     line-height: 21px;
   }
+
+  @media (max-width: $tablet-width) {
+    font-size: 14px;
+    line-height: 18px;
+  }
 }
 
 .tab__item {
@@ -225,6 +284,14 @@
   margin-bottom: 15px;
 
   background-color: transparent;
+
+  @media (max-width: $tablet-width) {
+    width: 236px;
+    margin-bottom: 12px;
+
+    font-size: 14px;
+    line-height: 18px;
+  }
 }
 
 .tab__icon {
@@ -234,6 +301,12 @@
   margin-top: 5px;
   margin-left: -1px;
   margin-right: 9px;
+
+  @media (max-width: $tablet-width) {
+    margin-top: 2px;
+    margin-left: -1px;
+    margin-right: 7px;
+  }
 }
 
 .tab__text {
@@ -271,6 +344,21 @@
     min-height: 48px;
     height: 48px;
   }
+
+  @media (max-width: $tablet-width) {
+    width: 290px;
+    margin-top: 13px;
+    min-height: 42px;
+    height: 43px;
+
+    font-size: 14px;
+    line-height: 16px;
+
+    &--online-services  {
+      margin-top: 12px;
+      margin-bottom: 50px;
+    }
+  }
 }
 
 .tab__description {
@@ -290,6 +378,14 @@
     font-size: 16px;
     line-height: 22px;
   }
+
+  @media (max-width: $tablet-width) {
+    width: 290px;
+    margin-top: 10px;
+
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 .tabs__description-link {
@@ -303,5 +399,10 @@
   @media (max-width: $desktop-width) {
     font-size: 16px;
     line-height: 22px;
+  }
+
+  @media (max-width: $tablet-width) {
+    font-size: 14px;
+    line-height: 20px;
   }
 }

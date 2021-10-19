@@ -53,7 +53,7 @@ function Promo() {
       return;
     }
 
-    if (xDiff > 0) { ////right
+    if (xDiff > 0) {
       if (activeSlide === Slide.CREDIT) {
         setActiveSlide(Slide.BRANCH);
 
@@ -62,7 +62,7 @@ function Promo() {
       setActiveSlide(activeSlide - 1);
     }
 
-    if (xDiff < 0) { ////left
+    if (xDiff < 0) {
       if (activeSlide === Slide.BRANCH) {
         setActiveSlide(Slide.CREDIT);
 
