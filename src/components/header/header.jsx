@@ -37,12 +37,16 @@ function Header() {
   const handleMenuButtonClick = (evt) => {
     evt.preventDefault();
 
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
     setMenuShown(true);
   };
 
   const handleMenuButtonClose = (evt) => {
     evt.preventDefault();
 
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'unset';
     setMenuShown(false);
   };
 
