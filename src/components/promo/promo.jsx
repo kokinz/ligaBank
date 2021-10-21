@@ -12,24 +12,12 @@ function Promo() {
 
   useEffect(() => {
     if (timeoutID === null) {
-      if (activeSlide === Slide.BRANCH) {
-        setTimeoutID(
-          setTimeout(() => {
-            setActiveSlide(Slide.CREDIT);
-
-            setTimeoutID(null);
-          }, SLIDE_DELAY),
-        );
-
-      } else {
-        setTimeoutID(
-          setTimeout(() => {
-            setActiveSlide(activeSlide + 1);
-
-            setTimeoutID(null);
-          }, SLIDE_DELAY),
-        );
-      }
+      setTimeoutID(
+        setTimeout(() => {
+          setActiveSlide(activeSlide === Slide.BRANCH ? Slide.CREDIT : activeSlide + 1);
+          setTimeoutID(null);
+        }, SLIDE_DELAY),
+      );
     }
   }, [activeSlide, timeoutID]);
 

@@ -139,11 +139,7 @@ function Calculator() {
     const cursorPosition = evt.target.selectionStart;
     const sum = parseInt(data.maternityCapital ? number - (number / setting.minInitialFee) - setting.maternityCapital : number - (number / setting.minInitialFee), 10);
 
-    if (number < setting.min || number > setting.max) {
-      setInputError(true);
-    } else {
-      setInputError(false);
-    }
+    setInputError(number < setting.min || number > setting.max);
 
     if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
@@ -195,11 +191,7 @@ function Calculator() {
       return;
     }
 
-    if (number < setting.min || number > setting.max) {
-      setInputError(true);
-    } else {
-      setInputError(false);
-    }
+    setInputError(number < setting.min || number > setting.max);
 
     if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
@@ -249,11 +241,7 @@ function Calculator() {
       return;
     }
 
-    if (number < setting.min || number > setting.max) {
-      setInputError(true);
-    } else {
-      setInputError(false);
-    }
+    setInputError(number < setting.min || number > setting.max);
 
     if (data.creditTarget === LoanType.MORTGAGE) {
       setData({
