@@ -45,7 +45,7 @@ function Footer() {
         </nav>
 
         <div className="footer__contact-number footer__contact-number--mobile">
-          <a href="tel:*0904" className="footer__phone-number footer__phone-number--mobile link">
+          <a href="tel:*0904" className="footer__phone-number footer__phone-number--mobile link" aria-label="Мобильный номер">
             <svg className="footer__mobile-image" viewBox="0 0 10 16" width={10} height={16}>
               <use xlinkHref="#mobile-phone" />
             </svg>
@@ -59,7 +59,7 @@ function Footer() {
         </div>
 
         <div className="footer__contact-number">
-          <a href="tel:88001112233" className="footer__phone-number link">
+          <a href="tel:88001112233" className="footer__phone-number link" aria-label="Телефонный номер">
             <svg className="footer__phone-image" viewBox="0 0 16 16" width={16} height={16}>
               <use xlinkHref="#phone" />
             </svg>

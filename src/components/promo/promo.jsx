@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Slide, SLIDE_DELAY} from '../../const';
+import {DESKTOP_WIDTH, Slide, SLIDE_DELAY} from '../../const';
+
 
 function Promo() {
   const [activeSlide, setActiveSlide] = useState(Slide.CREDIT);
@@ -43,6 +44,10 @@ function Promo() {
   };
 
   const handleSliderTouchMove = (evt) => {
+    if (document.body.clientWidth >= DESKTOP_WIDTH) {
+      return;
+    }
+
     const move = evt.changedTouches[0];
     const x2 = move.clientX;
     const y2 = move.clientY;

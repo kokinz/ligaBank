@@ -2,6 +2,7 @@ const CREDIT_START_SUM = 2000000;
 const ZERO_LENGTH = 4;
 const PERCENTAGE_INCOME = 45;
 const SLIDE_DELAY = 4000;
+const DESKTOP_WIDTH = 1024;
 
 const Tab = {
   CONTRIBUTIONS: {
@@ -67,4 +68,4 @@ const MountlyInterestRate = {
   LOWEST: 0.002916,
 };
 
-export {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, SLIDE_DELAY, Tab, Slide, LoanType, Mortgage, CarLending, MountlyInterestRate};
+export {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, SLIDE_DELAY, DESKTOP_WIDTH, Tab, Slide, LoanType, Mortgage, CarLending, MountlyInterestRate};

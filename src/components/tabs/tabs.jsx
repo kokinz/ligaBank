@@ -5,7 +5,7 @@ import CreditsTab from './tabs/credits-tab/credits-tab';
 import InsuranceTab from './tabs/insurance-tab/insurance-tab';
 import OnlineServicesTab from './tabs/online-services-tab/online-services-tab';
 
-import {Tab} from '../../const';
+import {DESKTOP_WIDTH, Tab} from '../../const';
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState(Tab.CONTRIBUTIONS.id);
@@ -44,6 +44,10 @@ function Tabs() {
   };
 
   const handleSliderTouchMove = (evt) => {
+    if (document.body.clientWidth >= DESKTOP_WIDTH) {
+      return;
+    }
+
     const move = evt.changedTouches[0];
     const x2 = move.clientX;
     const y2 = move.clientY;

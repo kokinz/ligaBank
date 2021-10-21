@@ -85,8 +85,8 @@ function Header() {
             Войти в Интернет-банк
           </a>
 
-          <button className={`header__menu-button button ${menuShown ? 'header__menu-button--menu' : ''}`} onClick={handleMenuButtonClick}>Меню</button>
-          <button className={`header__menu-close button ${menuShown ? 'header__menu-close--menu' : ''}`} onClick={handleMenuButtonClose}>Закрыть Меню</button>
+          <button className={`header__menu-button button ${menuShown ? 'header__menu-button--menu' : ''}`} onClick={handleMenuButtonClick} aria-label="Меню">Меню</button>
+          <button className={`header__menu-close button ${menuShown ? 'header__menu-close--menu' : ''}`} onClick={handleMenuButtonClose} aria-label="Закрыть меню">Закрыть Меню</button>
         </nav>
       </div>
 

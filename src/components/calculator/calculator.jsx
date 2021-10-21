@@ -649,7 +649,7 @@ function Calculator() {
 
             {data.sum < setting.minSum ?
               <div className="calculator__offer calculator__offer--error offer">
-                <p className="offer__header">
+                <p className="offer__header offer__header--error">
                   Наш банк не выдаёт
                   {data.creditTarget === LoanType.MORTGAGE && ' ипотечные кредиты меньше 500 000 рублей.'}
                   {data.creditTarget === LoanType.CAR_LENDING && ' автокредиты меньше 200 000 рублей.' }

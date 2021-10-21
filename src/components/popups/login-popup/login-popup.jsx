@@ -31,7 +31,7 @@ function LoginPopup ({onCloseClick}) {
     <div className="header__popup-wrapper">
       <form className="login popup" action="https://echo.htmlacademy.ru/" onSubmit={handleFormSubmit}>
         <p className="login__header">
-          <svg viewBox="0 0 151 31" width="151" height="31">
+          <svg viewBox="0 0 151 31" width="151" height="31" alt="Логотип">
             <use xlinkHref="#login-logo"></use>
           </svg>
         </p>
@@ -43,10 +43,10 @@ function LoginPopup ({onCloseClick}) {
         <div className="login__input-wrapper">
           <input className="login__input" ref={password} type="password" id="password" required />
 
-          <button className="login__show-password button" ref={showPassword} type="button" onMouseDown={handlePasswordMouseDown} onMouseUp={handlePasswordMouseUp}>
+          <button className="login__show-password button" ref={showPassword} type="button" onMouseDown={handlePasswordMouseDown} onMouseUp={handlePasswordMouseUp} onPointerDown={handlePasswordMouseDown} onPointerUp={handlePasswordMouseUp}>
             Посмотреть пароль
 
-            <svg viewBox="0 0 22 12" width="22" height="12">
+            <svg viewBox="0 0 22 12" width="22" height="12" aria-label="Посмотреть пароль">
               <use xlinkHref="#password-eye"></use>
             </svg>
           </button>
