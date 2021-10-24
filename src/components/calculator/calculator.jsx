@@ -237,7 +237,7 @@ function Calculator() {
     const number = getNumberFromString(propertyValue.current.value) + setting.step;
     const sum = parseInt(data.maternityCapital ? number - (number / setting.minInitialFee) - setting.maternityCapital : number - (number / setting.minInitialFee), 10);
 
-    if (number < setting.min) {
+    if (number > setting.max) {
       return;
     }
 
@@ -561,20 +561,20 @@ function Calculator() {
 
           <details className="calculator__selector selector" ref={details}>
             <summary className="selector__summary">
-              <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" defaultChecked onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" tabIndex="-1" defaultChecked onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" title={LoanType.MORTGAGE} onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" tabIndex="-1" title={LoanType.MORTGAGE} onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" title={LoanType.CAR_LENDING} onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" tabIndex="-1" title={LoanType.CAR_LENDING} onClick={handleSelectorClick} />
             </summary>
 
             <ul className="selector__options list">
               <li className="selector__option">
-                <label className="selector__label" htmlFor="item1">Ипотечное кредитование</label>
+                <label className="selector__label" htmlFor="item1" tabIndex="0">Ипотечное кредитование</label>
               </li>
 
               <li className="selector__option">
-                <label className="selector__label" htmlFor="item2">Автомобильное кредитование</label>
+                <label className="selector__label" htmlFor="item2" tabIndex="0">Автомобильное кредитование</label>
               </li>
             </ul>
           </details>

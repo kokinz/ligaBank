@@ -119,6 +119,7 @@
 .header__item {
   margin-right: 24px;
   padding-top: 37px;
+  margin-bottom: 30px;
 
   @media (max-width: $max-width) {
     margin-right: 15px;
@@ -155,6 +156,7 @@
 .header__user-link {
   display: flex;
   justify-content: space-between;
+  flex-shrink: 0;
   align-items: center;
   width: 203px;
 
