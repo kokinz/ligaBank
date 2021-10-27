@@ -27,9 +27,20 @@ function LoginPopup ({onCloseClick}) {
     password.current.type = 'password';
   };
 
+  const handleFormBlur = (evt) => {
+    if (evt.target.id === 'login' && evt.relatedTarget.id !== 'password') {
+      evt.target.focus();
+      return;
+    }
+
+    if (evt.target.id === 'close' && evt.relatedTarget.id !== 'submit') {
+      evt.target.focus();
+    }
+  };
+
   return (
-    <div className="header__popup-wrapper">
-      <form className="login popup" action="https://echo.htmlacademy.ru/" onSubmit={handleFormSubmit}>
+    <div className="header__popup-wrapper" onBlur={handleFormBlur}>
+      <form className="login popup" action="https://echo.htmlacademy.ru/" onSubmit={handleFormSubmit} >
         <p className="login__header">
           <svg viewBox="0 0 151 31" width="151" height="31" alt="Логотип">
             <use xlinkHref="#login-logo"></use>
@@ -54,9 +65,9 @@ function LoginPopup ({onCloseClick}) {
           <a className="login__forgotten-password button" href="/#">Забыли пароль?</a>
         </div>
 
-        <button className="login__button button" type="submit">Войти</button>
+        <button className="login__button button" type="submit" id="submit">Войти</button>
 
-        <button className="login__close-button button" onClick={onCloseClick}>Закрыть</button>
+        <button className="login__close-button button" id="close" onClick={onCloseClick}>Закрыть</button>
       </form>
     </div>
 
