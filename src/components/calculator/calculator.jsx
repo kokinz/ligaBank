@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import ThanksPopup from '../popups/thanks-popup/thanks-popup';
 
 import {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, LoanType, Mortgage, CarLending, MountlyInterestRate} from '../../const';
@@ -35,6 +35,8 @@ function Calculator() {
   const [popupShown, setPopupShown] = useState(false);
 
   const details = useRef();
+  const mortgageSelector = useRef();
+  const carLendingSelector = useRef();
 
   const propertyValue = useRef();
 
@@ -47,6 +49,12 @@ function Calculator() {
   const userFullName = useRef();
   const userPhoneNumber = useRef();
   const userEmail = useRef();
+
+  useEffect(() => {
+    if (inputError) {
+      setFormShown(false);
+    }
+  }, [inputError]);
 
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
@@ -134,6 +142,17 @@ function Calculator() {
     }
   };
 
+  const handleSelectorKeydown = (evt) => {
+    evt.preventDefault();
+
+    if (evt.key !== 'Enter') {
+      return;
+    }
+
+    evt.target.title === LoanType.MORTGAGE ? mortgageSelector.current.checked = true : carLendingSelector.current.checked = true;
+    handleSelectorClick(evt);
+  };
+
   const handlePropertyValueType = (evt) => {
     const number = getNumberFromString(evt.target.value);
     const cursorPosition = evt.target.selectionStart;
@@ -184,11 +203,15 @@ function Calculator() {
   };
 
   const handlePropertyValueMinus = () => {
-    const number = getNumberFromString(propertyValue.current.value) - setting.step;
+    let number = getNumberFromString(propertyValue.current.value) - setting.step;
     const sum = parseInt(data.maternityCapital ? number - (number / setting.minInitialFee) - setting.maternityCapital : number - (number / setting.minInitialFee), 10);
 
     if (number < setting.min) {
-      return;
+      number = setting.min;
+    }
+
+    if(number > setting.max) {
+      number = setting.max;
     }
 
     setInputError(number < setting.min || number > setting.max);
@@ -234,11 +257,15 @@ function Calculator() {
   };
 
   const handlePropertyValuePlus = () => {
-    const number = getNumberFromString(propertyValue.current.value) + setting.step;
+    let number = getNumberFromString(propertyValue.current.value) + setting.step;
     const sum = parseInt(data.maternityCapital ? number - (number / setting.minInitialFee) - setting.maternityCapital : number - (number / setting.minInitialFee), 10);
 
-    if (number > setting.max) {
-      return;
+    if (number < setting.min) {
+      number = setting.min;
+    }
+
+    if(number > setting.max) {
+      number = setting.max;
     }
 
     setInputError(number < setting.min || number > setting.max);
@@ -477,6 +504,13 @@ function Calculator() {
 
   const handleMakeRequestClick = (evt) => {
     evt.preventDefault();
+
+    if (inputError) {
+      setFormShown(false);
+
+      return;
+    }
+
     setFormShown(true);
   };
 
@@ -563,18 +597,18 @@ function Calculator() {
             <summary className="selector__summary">
               <input className="selector__option-input" type="radio" name="creditTarget" id="default" title="Выберите цель кредита" tabIndex="-1" defaultChecked onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" tabIndex="-1" title={LoanType.MORTGAGE} onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item1" tabIndex="-1" ref={mortgageSelector} title={LoanType.MORTGAGE} onClick={handleSelectorClick} />
 
-              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" tabIndex="-1" title={LoanType.CAR_LENDING} onClick={handleSelectorClick} />
+              <input className="selector__option-input" type="radio" name="creditTarget" id="item2" tabIndex="-1" ref={carLendingSelector} title={LoanType.CAR_LENDING} onClick={handleSelectorClick} />
             </summary>
 
             <ul className="selector__options list">
               <li className="selector__option">
-                <label className="selector__label" htmlFor="item1" tabIndex="0">Ипотечное кредитование</label>
+                <label className="selector__label" htmlFor="item1" tabIndex="0" title={LoanType.MORTGAGE} onKeyUp={handleSelectorKeydown}>Ипотечное кредитование</label>
               </li>
 
               <li className="selector__option">
-                <label className="selector__label" htmlFor="item2" tabIndex="0">Автомобильное кредитование</label>
+                <label className="selector__label" htmlFor="item2" tabIndex="0" title={LoanType.CAR_LENDING} onKeyUp={handleSelectorKeydown}>Автомобильное кредитование</label>
               </li>
             </ul>
           </details>
@@ -591,7 +625,7 @@ function Calculator() {
               <div className="calculator__input-wrapper">
                 <button className="calculator__button-minus button" type="button" onClick={handlePropertyValueMinus}>Минус</button>
 
-                <input className={inputError ? 'calculator__input calculator__input--error' : 'calculator__input'} ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" onChange={handlePropertyValueType} />
+                <input className={inputError ? 'calculator__input calculator__input--error' : 'calculator__input'} maxLength="17" ref={propertyValue} type="text" id="propertyValue" defaultValue="2 000 000 рублей" onChange={handlePropertyValueType} />
 
                 {inputError ? <span className="calculator__error">Некорректное значение</span> : ''}
 
@@ -608,7 +642,7 @@ function Calculator() {
               </div>
 
               <input className="calculator__range" id="initialFeeRange" ref={initialFeeRange} type="range" min={100 / setting.minInitialFee} max="100" step="5" defaultValue={100 / setting.minInitialFee} onChange={handleInitialFeeChange} />
-              <label htmlFor="initialFeeRange" className="calculator__range-text">{100 / setting.minInitialFee}%</label>
+              <label htmlFor="initialFeeRange" className="calculator__range-text">{`${parseInt(data.initialFee / data.propertyValue * 100, 10)}`}%</label>
 
               <label className="calculator__label calculator__label--loan-terms" htmlFor="loanTerms">Срок кредитования</label>
               <div className="calculator__input-wrapper">

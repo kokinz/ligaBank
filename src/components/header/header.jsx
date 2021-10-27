@@ -53,7 +53,7 @@ function Header() {
   return(
     <header className={`header ${menuShown ? 'header--menu' : ''}`}>
       <div className="header__wrapper container">
-        <a className="header__logo link" href="/" aria-label="Лига Банк">
+        <a className="header__logo" href="/#" aria-label="Лига Банк">
           <svg className="header__logo-image header__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
             <use xlinkHref="#logo" />
           </svg>
@@ -68,20 +68,20 @@ function Header() {
         <nav className={`header__nav nav ${menuShown ? 'header__nav--menu' : ''}`}>
           <ul className={`header__list list ${menuShown ? 'header__list--menu' : ''}`}>
             <li className="header__item">
-              <a className="header__link link" href="/">Услуги</a>
+              <a className="header__link link" href="/#">Услуги</a>
             </li>
             <li className="header__item">
-              <a className="header__link link" href="/">Рассчитать кредит</a>
+              <a className="header__link link" href="/#">Рассчитать кредит</a>
             </li>
             <li className="header__item">
-              <a className="header__link link" href="/">Конвертер валют</a>
+              <a className="header__link link" href="/#">Конвертер валют</a>
             </li>
             <li className="header__item">
-              <a className="header__link link" href="/">Контакты</a>
+              <a className="header__link link" href="/#">Контакты</a>
             </li>
           </ul>
 
-          <a className={`header__user-link link ${menuShown ? 'header__user-link--menu' : ''}`} href="/" aria-label="Авторизация" onClick={handleLoginClick}>
+          <a className={`header__user-link link ${menuShown ? 'header__user-link--menu' : ''}`} href="/#" aria-label="Авторизация" onClick={handleLoginClick}>
             <svg className={`header__user-image ${menuShown ? 'header__user-image--menu' : ''}`} viewBox="0 0 20 22" width="20" height="22">
               <use xlinkHref="#user-login"></use>
             </svg>

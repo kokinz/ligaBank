@@ -30,7 +30,7 @@ function CreditsTab() {
       </ul>
 
       <p className="tab__description">
-        Рассчитайте ежемесячный платеж<br /> и ставку по кредиту воспользовавшись нашим <a href="/" className="tabs__description-link">кредитным калькулятором</a>
+        Рассчитайте ежемесячный платеж<br /> и ставку по кредиту воспользовавшись нашим <a href="/#" className="tabs__description-link">кредитным калькулятором</a>
       </p>
     </section>
   );

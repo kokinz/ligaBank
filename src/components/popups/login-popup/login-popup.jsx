@@ -51,7 +51,7 @@ function LoginPopup ({onCloseClick}) {
             </svg>
           </button>
 
-          <a className="login__forgotten-password button" href="/">Забыли пароль?</a>
+          <a className="login__forgotten-password button" href="/#">Забыли пароль?</a>
         </div>
 
         <button className="login__button button" type="submit">Войти</button>

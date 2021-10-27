@@ -313,7 +313,16 @@
 
   cursor: pointer;
 
+  @media (max-width: $max-width) {
+    width: 329px;
+  }
+
+  @media (max-width: $desktop-width) {
+    width: 677px;
+  }
+
   @media (max-width: $tablet-width) {
+    width: 289px;
     padding-left: 14px;
   }
 }

@@ -5,8 +5,11 @@
 .slider__item {
   display: none;
   min-height: 400px;
+  padding: 0 7.1%;
+  padding-bottom: 48px;
 
   background-color: #2B3C4F;
+  max-width: 100%;
 
   &--credit {
     background:
@@ -15,15 +18,37 @@
     linear-gradient(183.47deg, rgba(56, 65, 255, 0) 66.3%, #3841FF 97.14%) bottom left 11%/12.4% 100% no-repeat,
     linear-gradient(183.47deg, rgba(56, 65, 255, 0) 27.26%, #3841FF 97.14%) bottom left 72.8%/19.8% 60% no-repeat,
     linear-gradient(180.24deg, rgba(32, 39, 179, 0) 32.89%, #2027B3 99.79%) bottom left 99.9%/21.8% 100% no-repeat,
-    linear-gradient(#2C36F2, #2C36F2) top left/1366px 400px no-repeat;
+    linear-gradient(#2C36F2, #2C36F2) top left/100% 100% no-repeat;
+
+    @media (max-width: $max-width) {
+      background:
+    url('../../img/cards.png') top 61px right 12.2%/444px 286px no-repeat,
+    linear-gradient(180.24deg, rgba(32, 39, 179, 0) 36.31%, #2027B3 99.79%) bottom left/11% 100% no-repeat,
+    linear-gradient(183.47deg, rgba(56, 65, 255, 0) 66.3%, #3841FF 97.14%) bottom left 11%/12.4% 100% no-repeat,
+    linear-gradient(183.47deg, rgba(56, 65, 255, 0) 27.26%, #3841FF 97.14%) bottom left 72.8%/19.8% 60% no-repeat,
+    linear-gradient(180.24deg, rgba(32, 39, 179, 0) 32.89%, #2027B3 99.79%) bottom left 99.9%/21.8% 100% no-repeat,
+    linear-gradient(#2C36F2, #2C36F2) top left/100% 100% no-repeat;
+    }
   }
 
   &--confidence {
-    background: url('../../img/confidence.png') top left 100% no-repeat;
+    background: url('../../img/confidence.png') bottom left 100% no-repeat,
+    linear-gradient(to right, #DDE2EC 33%, #F3FAFF);
+
+    @media (max-width: $max-width) {
+      background: url('../../img/confidence.png') bottom left 40% no-repeat,
+      linear-gradient(to right, #DDE2EC 33%, #F3FAFF);
+    }
   }
 
   &--branch {
-    background: url('../../img/branch.png') top left 100% no-repeat;
+    background: url('../../img/branch.png') bottom left 100% no-repeat,
+    linear-gradient(#E6F1FE, #E6F1FE);
+
+    @media (max-width: $max-width) {
+      background: url('../../img/branch.png') bottom left 55% no-repeat,
+      linear-gradient(#E6F1FE, #E6F1FE);
+    }
   }
 
   &--show {
@@ -32,7 +57,10 @@
 
   @media (max-width: $desktop-width) {
     min-height: 300px;
-    height: 300px;
+    min-height: 300px;
+    width: 100%;
+    padding: 0 6%;
+    padding-bottom: 48px;
 
     &--credit {
       background:
@@ -41,34 +69,41 @@
       linear-gradient(183.47deg, rgba(56, 65, 255, 0) 66.3%, #3841FF 97.14%) bottom left 11%/12.4% 100% no-repeat,
       linear-gradient(183.47deg, rgba(56, 65, 255, 0) 27.26%, #3841FF 97.14%) bottom left 72.8%/19.8% 60% no-repeat,
       linear-gradient(180.24deg, rgba(32, 39, 179, 0) 32.89%, #2027B3 99.79%) bottom left 99.9%/21.8% 100% no-repeat,
-      linear-gradient(#2C36F2, #2C36F2) top left/1366px 400px no-repeat;
+      linear-gradient(#2C36F2, #2C36F2) top left/1366px 100% no-repeat;
     }
 
     &--confidence {
-      background: url('../../img/confidence-tablet.png') top left 100% no-repeat;
+      background: url('../../img/confidence-tablet.png') bottom left 100% no-repeat,
+      linear-gradient(to right, #DDE2EC 33%, #F3FAFF);
     }
 
     &--branch {
-      background: url('../../img/branch-tablet.png') top left 100% no-repeat;
+      background: url('../../img/branch-tablet.png') bottom left 100% no-repeat,
+      linear-gradient(#E6F1FE, #E6F1FE);
     }
   }
 
   @media (max-width: $tablet-width) {
     min-height: 226px;
-    height: 226px;
+    min-height: 226px;
+    padding: 0 5%;
+    padding-bottom: 38px;
+
 
     &--credit {
       background:
       url('../../img/cards-mobile.png') top 29px right 0/105px auto no-repeat,
-      linear-gradient(#2C36F2, #2C36F2) top left/1366px 400px no-repeat;
+      linear-gradient(#2C36F2, #2C36F2) top left/100% 100% no-repeat;
     }
 
     &--confidence {
-      background: url('../../img/confidence-mobile.png') top left 100% no-repeat;
+      background: url('../../img/confidence-mobile.png') bottom left 100% no-repeat,
+      linear-gradient(to right, #DDE2EC 33%, #F3FAFF);
     }
 
     &--branch {
-      background: url('../../img/branch-mobile.png') top left 100% no-repeat;
+      background: url('../../img/branch-mobile.png') bottom left 100% no-repeat,
+      linear-gradient(#E6F1FE, #E6F1FE);
     }
   }
 }
@@ -76,7 +111,7 @@
 .promo__header {
   margin: 0;
   padding-top: 102px;
-  padding-left: 170px;
+  padding-left: 14.6%;
 
   font-weight: 700;
   font-size: 54px;
@@ -95,7 +130,7 @@
 
   @media (max-width: $desktop-width) {
     padding-top: 65px;
-    padding-left: 40px;
+    padding-left: 6%;
 
     font-size: 46px;
     line-height: 54px;
@@ -113,7 +148,8 @@
 .promo__description {
   margin: 0;
   padding-top: 8px;
-  padding-left: 170px;
+  padding-left: 14.6%;
+  width: 290px;
 
   font-weight: 400;
   font-size: 22px;
@@ -122,6 +158,7 @@
 
   &--confidence {
     color: #2B3C4F;
+    width: 400px;
 
     @media (max-width: $tablet-width) {
       width: 150px;
@@ -134,7 +171,7 @@
 
   @media (max-width: $desktop-width) {
     padding-top: 6px;
-    padding-left: 40px;
+    padding-left: 6%;
 
     font-size: 18px;
     line-height: 21px;
@@ -153,7 +190,7 @@
   min-width: 234px;
   min-height: 53px;
   margin-top: 34px;
-  margin-left: 170px;
+  margin-left: 14.6%;
 
   color: #1F1E25;
 
@@ -170,7 +207,7 @@
     width: 206px;
     height: 48px;
     margin-top: 30px;
-    margin-left: 41px;
+    margin-left: 6%;
 
     font-size: 16px;
     line-height: 19px;

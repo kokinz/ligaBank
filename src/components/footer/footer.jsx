@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__wrapper container">
         <div className="footer__logo-wrapper">
-          <a className="footer__logo link" href="/" aria-label="Лига Банк">
+          <a className="footer__logo" href="/#" aria-label="Лига Банк">
             <svg className="footer__logo-image footer__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
               <use xlinkHref="#logo" />
             </svg>
@@ -30,16 +30,16 @@ function Footer() {
         <nav className="footer__nav nav">
           <ul className="footer__list">
             <li className="footer__item">
-              <a className="footer__link link" href="/">Услуги</a>
+              <a className="footer__link link" href="/#">Услуги</a>
             </li>
             <li className="footer__item">
-              <a className="footer__link link" href="/">Рассчитать кредит</a>
+              <a className="footer__link link" href="/#">Рассчитать кредит</a>
             </li>
             <li className="footer__item">
-              <a className="footer__link link" href="/">Контакты</a>
+              <a className="footer__link link" href="/#">Контакты</a>
             </li>
             <li className="footer__item">
-              <a className="footer__link link" href="/">Задать вопрос</a>
+              <a className="footer__link link" href="/#">Задать вопрос</a>
             </li>
           </ul>
         </nav>
@@ -74,28 +74,28 @@ function Footer() {
 
         <ul className="footer__social">
           <li>
-            <a href="/" className="link" aria-label="Facebook">
+            <a href="/#" className="footer__social-link link" aria-label="Facebook">
               <svg width="9" height="16" viewBox="0 0 9 16">
                 <use xlinkHref="#facebook"></use>
               </svg>
             </a>
           </li>
           <li>
-            <a href="/" className="link" aria-label="Instagram">
+            <a href="/#" className="footer__social-link link" aria-label="Instagram">
               <svg width="16" height="16" viewBox="0 0 16 16">
                 <use xlinkHref="#instagram"></use>
               </svg>
             </a>
           </li>
           <li>
-            <a href="/" className="link" aria-label="Twitter">
+            <a href="/#" className="footer__social-link link" aria-label="Twitter">
               <svg width="16" height="13" viewBox="0 0 16 13">
                 <use xlinkHref="#twitter"></use>
               </svg>
             </a>
           </li>
           <li>
-            <a href="/" className="link" aria-label="Youtube">
+            <a href="/#" className="footer__social-link link" aria-label="Youtube">
               <svg width="16" height="13" viewBox="0 0 16 13">
                 <use xlinkHref="#youtube"></use>
               </svg>

@@ -86,7 +86,7 @@ function Tabs() {
       <ul className="tabs__list list">
         {tabs.map((tab) => (
           <li key={tab.name} className="tabs__item">
-            <a href="/" className={`tabs__link link ${tab.id === activeTab ? 'tabs__link--active' : ''}`} id={tab.id} onClick={handleMouseClick}>
+            <a href="/#" className={`tabs__link link ${tab.id === activeTab ? 'tabs__link--active' : ''}`} id={tab.id} onClick={handleMouseClick}>
               <svg className={`tabs__icon tabs__icon-${tab.icon} ${tab.id === activeTab ? 'tabs__icon--active' : ''}`}>
                 <use xlinkHref={`#${tab.icon}`}></use>
               </svg>
