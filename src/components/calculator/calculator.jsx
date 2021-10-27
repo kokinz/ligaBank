@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import ThanksPopup from '../popups/thanks-popup/thanks-popup';
 
 import {CREDIT_START_SUM, ZERO_LENGTH, PERCENTAGE_INCOME, LoanType, Mortgage, CarLending, MountlyInterestRate} from '../../const';
-import {getNumberFromString, getNumberWithSpaces, getMonthlyPayment} from '../../utils';
+import {getNumberFromString, getNumberWithSpaces, getMonthlyPayment, getWordFromYearsNumber} from '../../utils';
 
 function Calculator() {
   const [data, setData] = useState({
@@ -409,7 +409,7 @@ function Calculator() {
         monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, setting.minTerm),
       });
 
-      loanTerms.current.value = setting.minTerm === CarLending.MIN_TERM ? `${setting.minTerm} год` : `${setting.minTerm} лет`;
+      loanTerms.current.value = setting.minTerm === CarLending.MIN_TERM ? `${setting.minTerm} ${getWordFromYearsNumber(setting.minTerm)}` : `${setting.minTerm} ${getWordFromYearsNumber(setting.minTerm)}`;
       loanTermsRange.current.value = setting.minTerm;
       loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
 
@@ -423,7 +423,7 @@ function Calculator() {
         monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, setting.maxTerm),
       });
 
-      loanTerms.current.value = `${setting.minTerm} лет`;
+      loanTerms.current.value = `${setting.minTerm} ${getWordFromYearsNumber(setting.minTerm)}`;
       loanTermsRange.current.value = setting.maxTerm;
       loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
 
@@ -436,7 +436,7 @@ function Calculator() {
       monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, number),
     });
 
-    loanTerms.current.value = `${getNumberWithSpaces(number)} лет`;
+    loanTerms.current.value = `${getNumberWithSpaces(number)} ${getWordFromYearsNumber(number)}`;
     loanTermsRange.current.value = number;
     loanTerms.current.selectionStart = loanTerms.current.selectionEnd = cursorPosition;
   };
@@ -450,7 +450,7 @@ function Calculator() {
       monthlyPayment: getMonthlyPayment(data.sum, data.interestRate, number),
     });
 
-    loanTerms.current.value = `${number} лет`;
+    loanTerms.current.value = `${number} ${getWordFromYearsNumber(number)}`;
   };
 
   const handleMaternityCapitalClick = () => {

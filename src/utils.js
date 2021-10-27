@@ -24,4 +24,23 @@ const getMonthlyPayment = (sum, rate, years) => {
   return parseInt(sum * (rate + rate / (Math.pow(1 + rate, periods) - 1)), 10);
 };
 
-export {getNumberFromString, getNumberWithSpaces, getMonthlyPayment};
+const getWordFromYearsNumber = (number) => {
+  const chars = [...number.toString()];
+  const char = chars[chars.length - 1];
+
+  if (number > 4 && number < 21) {
+    return 'лет';
+  }
+
+  if (char === '1' ) {
+    return 'год';
+  }
+
+  if (char === '2' || char === '3' || char === '4') {
+    return 'года';
+  }
+
+  return 'лет';
+};
+
+export {getNumberFromString, getNumberWithSpaces, getMonthlyPayment, getWordFromYearsNumber};
