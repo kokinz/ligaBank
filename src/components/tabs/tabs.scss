@@ -13,7 +13,7 @@
 
   @media (max-width: $tablet-width) {
     min-height: 362px;
-    padding: 55px 0 0 15px;
+    padding: 55px 0 0 5%;
   }
 }
 
@@ -150,7 +150,7 @@
 
     @media (max-width: $tablet-width) {
       background-image: url(../../img/piggybank-mobile.png);
-      background-position: right 0 bottom 151px;
+      background-position: left calc(85% + 33px) bottom 151px;
     }
   }
 
@@ -171,7 +171,7 @@
 
     @media (max-width: $tablet-width) {
       background-image: url(../../img/car-mobile.png);
-      background-position: right 0 bottom 122px;
+      background-position: left calc(85% + 33px) bottom 122px;
     }
   }
 
@@ -191,7 +191,7 @@
 
     @media (max-width: $tablet-width) {
       background-image: url(../../img/lock-mobile.png);
-      background-position: right 0 bottom 115px;
+      background-position: left calc(85% + 33px) bottom 115px;
     }
   }
 
@@ -211,7 +211,7 @@
 
     @media (max-width: $tablet-width) {
       background-image: url(../../img/mobile-mobile.png);
-      background-position: right 0 bottom 150px;
+      background-position: left calc(85% + 33px) bottom 150px;
     }
   }
 
@@ -261,21 +261,22 @@
   }
 
   @media (max-width: $tablet-width) {
+    width: 100%;
     font-size: 16px;
     line-height: 22px;
 
     margin-bottom: 21px;
 
     &--credits {
-      width: 230px;
+      width: 70%;
     }
 
     &--insurance {
-      width: 265px;
+      width: 82%;
     }
 
     &--online-services {
-      width: 242px;
+      width: 75%;
     }
   }
 }
@@ -309,7 +310,7 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 236px;
+    width: 75%;
     margin-bottom: 12px;
 
     font-size: 14px;
@@ -329,7 +330,7 @@
     width: 24px;
     margin-top: 2px;
     margin-left: -3px;
-    margin-right: 3px;
+    margin-right: -5px;
   }
 }
 
@@ -346,6 +347,10 @@
 
     &--online-services {
       width: 325px;
+
+      @media (max-width: $tablet-width) {
+        width: 85%;
+      }
     }
   }
 }
@@ -404,7 +409,7 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 290px;
+    width: 100%;
     margin-top: 10px;
 
     font-size: 14px;
