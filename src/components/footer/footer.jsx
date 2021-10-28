@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__wrapper container">
         <div className="footer__logo-wrapper">
-          <a className="footer__logo" href="/#" aria-label="Лига Банк">
+          <a className="footer__logo" href="/" aria-label="Лига Банк">
             <svg className="footer__logo-image footer__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
               <use xlinkHref="#logo" />
             </svg>

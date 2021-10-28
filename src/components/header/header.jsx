@@ -53,7 +53,7 @@ function Header() {
   return(
     <header className={`header ${menuShown ? 'header--menu' : ''}`}>
       <div className="header__wrapper container">
-        <a className="header__logo" href="/#" aria-label="Лига Банк">
+        <a className="header__logo" href="/" aria-label="Лига Банк">
           <svg className="header__logo-image header__logo-image--desktop" viewBox="0 0 150 27" width={150} height={27}>
             <use xlinkHref="#logo" />
           </svg>
