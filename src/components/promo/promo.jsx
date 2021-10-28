@@ -10,16 +10,16 @@ function Promo() {
     y1: 0,
   });
 
-  // useEffect(() => {
-  //   if (timeoutID === null) {
-  //     setTimeoutID(
-  //       setTimeout(() => {
-  //         setActiveSlide(activeSlide === Slide.BRANCH ? Slide.CREDIT : activeSlide + 1);
-  //         setTimeoutID(null);
-  //       }, SLIDE_DELAY),
-  //     );
-  //   }
-  // }, [activeSlide, timeoutID]);
+  useEffect(() => {
+    if (timeoutID === null) {
+      setTimeoutID(
+        setTimeout(() => {
+          setActiveSlide(activeSlide === Slide.BRANCH ? Slide.CREDIT : activeSlide + 1);
+          setTimeoutID(null);
+        }, SLIDE_DELAY),
+      );
+    }
+  }, [activeSlide, timeoutID]);
 
   const handleSliderTouchStart = (evt) => {
     const touch = evt.touches[0];

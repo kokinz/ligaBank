@@ -92,17 +92,17 @@
 
     &--credit {
       background:
-      url('../../img/cards-mobile.png') top 29px right 0/105px auto no-repeat,
+      url('../../img/cards-tablet.png') calc(50% + 226px) -11px/334px auto no-repeat,
       linear-gradient(#2C36F2, #2C36F2) top left/100% 100% no-repeat;
     }
 
     &--confidence {
-      background: url('../../img/confidence-mobile.png') bottom left 100% no-repeat,
-      linear-gradient(to right, #DDE2EC 33%, #F3FAFF);
+      background: url('../../img/confidence-tablet.png') calc(50% - 47px) top/auto 226px no-repeat,
+      linear-gradient(to right, #DDE2EC, #DDE2EC 50%, #F3FAFF 50%, #F3FAFF);
     }
 
     &--branch {
-      background: url('../../img/branch-mobile.png') bottom left 100% no-repeat,
+      background: url('../../img/branch-tablet.png') calc(50% - 57px) top/auto 226px no-repeat,
       linear-gradient(#E6F1FE, #E6F1FE);
     }
   }
@@ -161,7 +161,7 @@
     width: 400px;
 
     @media (max-width: $tablet-width) {
-      width: 150px;
+      width: 49%;
     }
   }
 
