@@ -97,13 +97,13 @@
     }
 
     &--confidence {
-      background: url('../../img/confidence-tablet.png') calc(50% - 47px) top/auto 226px no-repeat,
+      background: url('../../img/confidence.png') calc(70% + 20px) top/auto 226px no-repeat,
       linear-gradient(to right, #DDE2EC, #DDE2EC 50%, #F3FAFF 50%, #F3FAFF);
     }
 
     &--branch {
-      background: url('../../img/branch-tablet.png') calc(50% - 57px) top/auto 226px no-repeat,
-      linear-gradient(#E6F1FE, #E6F1FE);
+      background: url('../../img/branch.png') calc(70% + 33px) top/auto 226px no-repeat,
+      linear-gradient(to right, #E6F1FE, #F0F8FE);
     }
   }
 }

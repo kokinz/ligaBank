@@ -86,11 +86,11 @@
 
     @media (max-width: $tablet-width) {
       padding-top: 40px;
-      width: 290px;
+      width: 100%;
       margin-bottom: 0;
 
       &--third-step {
-        width: 290px;
+        width: 100%;
         margin-bottom: 143px;
       }
     }
@@ -265,6 +265,10 @@
 	margin: 0;
 
   counter-reset: labels;
+
+  @media (max-width: $max-width) {
+    width: calc(100% + 2px);
+  }
 }
 
 
@@ -294,17 +298,16 @@
   }
 
   @media (max-width: $max-width) {
-    width: 330px;
+    width: 100%;
   }
 
   @media (max-width: $desktop-width) {
-    box-sizing: content-box;
     width: 100%;
   }
 
   @media (max-width: $tablet-width) {
     box-sizing: border-box;
-    width: 290px;
+    width: 100%;
   }
 }
 
@@ -433,10 +436,6 @@
   @media (max-width: $desktop-width) {
     width: 100%;
   }
-
-  @media (max-width: $tablet-width) {
-    width: 290px;
-  }
 }
 
 .calculator__button-minus {
@@ -563,13 +562,27 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 290px;
     margin-bottom: 20px;
-    padding-left: 12px;
+    padding-left: 4px;
+    padding-top: 2px;
     margin-right: 0;
 
     &--full-name {
+      padding-left: 11px;
+      padding-top: 2px;
       margin-top: 14px;
+    }
+
+    &--user-phone {
+      padding-left: 11px;
+      padding-top: 2px;
+      width: 100%
+    }
+
+    &--user-email {
+      padding-left: 11px;
+      padding-top: 2px;
+      width: 100%
     }
   }
 }
@@ -741,10 +754,6 @@
   @media (max-width: $desktop-width) {
     width: 100%;
   }
-
-  @media (max-width: $tablet-width) {
-    width: 290px;
-  }
 }
 
 .calculator__range-text {
@@ -780,10 +789,6 @@
     @media (max-width: $desktop-width) {
       position: absolute;
       right: 0;
-    }
-
-    @media (max-width: $tablet-width) {
-      position: static;
     }
   }
 }
@@ -853,8 +858,8 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 290px;
-    height: 433px;
+    min-height: 100px;
+    height: auto;
 
     padding-left: 0;
     margin-top: 7px;
@@ -878,7 +883,6 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 230px;
     padding-top: 35px;
     padding-left: 15px;
     margin-bottom: 23px;
@@ -912,6 +916,8 @@
   }
 
   @media (max-width: $tablet-width) {
+    width: 65%;
+    max-width: 320px;
     margin-bottom: 14px;
   }
 }
@@ -987,8 +993,8 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 260px;
-    margin: 0 auto;
+    width: 90%;
+    margin: 0 auto 40px;
     margin-top: 15px;
 
     font-size: 14px;
