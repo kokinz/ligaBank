@@ -51,10 +51,10 @@ function Calculator() {
   const userEmail = useRef();
 
   useEffect(() => {
-    if (inputError) {
+    if (inputError || data.sum < setting.minSum) {
       setFormShown(false);
     }
-  }, [inputError]);
+  }, [inputError, data.sum, setting.minSum]);
 
   const handleSelectorClick = (evt) => {
     if (!details.current.open) {
@@ -747,7 +747,7 @@ function Calculator() {
               <li className="calculator__data-item">
                 <span className="calculator__data-header">Срок кредитования</span>
 
-                <span className="calculator__data-value">{data.loanTerms} лет</span>
+                <span className="calculator__data-value">{data.loanTerms} {getWordFromYearsNumber(data.loanTerms)}</span>
               </li>
             </ul>
 

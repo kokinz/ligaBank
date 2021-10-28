@@ -1,12 +1,13 @@
 .map {
   margin-bottom: 106px;
 
-  @media (max-width: $tablet-width) {
-    padding: 0;
+  @media (max-width: $desktop-width) {
+    width: 100%;
   }
 
   @media (max-width: $tablet-width) {
     margin-bottom: 56px;
+    padding: 0;
   }
 }
 

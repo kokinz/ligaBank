@@ -3,23 +3,23 @@ import {DESKTOP_WIDTH, Slide, SLIDE_DELAY} from '../../const';
 
 
 function Promo() {
-  const [activeSlide, setActiveSlide] = useState(Slide.CONFIDENCE);
+  const [activeSlide, setActiveSlide] = useState(Slide.CREDIT);
   const [timeoutID, setTimeoutID] = useState(null);
   const [touchCoordinates, setTouchCoordinates] = useState({
     x1: 0,
     y1: 0,
   });
 
-  useEffect(() => {
-    if (timeoutID === null) {
-      setTimeoutID(
-        setTimeout(() => {
-          setActiveSlide(activeSlide === Slide.BRANCH ? Slide.CREDIT : activeSlide + 1);
-          setTimeoutID(null);
-        }, SLIDE_DELAY),
-      );
-    }
-  }, [activeSlide, timeoutID]);
+  // useEffect(() => {
+  //   if (timeoutID === null) {
+  //     setTimeoutID(
+  //       setTimeout(() => {
+  //         setActiveSlide(activeSlide === Slide.BRANCH ? Slide.CREDIT : activeSlide + 1);
+  //         setTimeoutID(null);
+  //       }, SLIDE_DELAY),
+  //     );
+  //   }
+  // }, [activeSlide, timeoutID]);
 
   const handleSliderTouchStart = (evt) => {
     const touch = evt.touches[0];

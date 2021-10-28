@@ -20,6 +20,8 @@
 
   @media (max-width: $desktop-width) {
     min-height: 69px;
+    width: 100%;
+    padding: 0 6%;
   }
 
   @media (max-width: $tablet-width) {
@@ -88,7 +90,7 @@
   }
 
   @media (max-width: $desktop-width) {
-    margin-left: 65px;
+    margin-left: 9.5%;
   }
 
   @media (max-width: $tablet-width) {
@@ -107,6 +109,10 @@
 .header__list {
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: $desktop-width) {
+    width: 90%;
+  }
 
   @media (max-width: $tablet-width) {
     display: none;
@@ -134,7 +140,7 @@
 
   @media (max-width: $desktop-width) {
     padding-top: 30px;
-    margin-right: 19px;
+    margin-right: 4.5%;
     margin-bottom: 15px;
   }
 

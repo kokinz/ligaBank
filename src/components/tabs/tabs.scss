@@ -241,7 +241,7 @@
   }
 
   @media (max-width: $desktop-width) {
-    width: 304px;
+    width: 50%;
     margin-bottom: 23px;
 
     font-size: 18px;
@@ -304,6 +304,10 @@
 
   background-color: transparent;
 
+  @media (max-width: $desktop-width) {
+    width: 52%;
+  }
+
   @media (max-width: $tablet-width) {
     width: 236px;
     margin-bottom: 12px;
@@ -338,7 +342,7 @@
   }
 
   @media (max-width: $desktop-width) {
-    width: 360px;
+    width: 100%;
 
     &--online-services {
       width: 325px;

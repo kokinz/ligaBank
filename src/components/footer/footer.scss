@@ -14,6 +14,7 @@
     justify-content: flex-start;
     flex-direction: row;
 
+    width: 100%;
     min-height: 320px;
   }
 
@@ -221,7 +222,7 @@
   @media (max-width: $desktop-width) {
     position: absolute;
     top: 97px;
-    right: 141px;
+    left: 51%;
     margin-right: 30px;
     padding-top: 10px;
     padding-left: 3px;
@@ -314,10 +315,13 @@
   }
 
   @media (max-width: $desktop-width) {
+    position: absolute;
+
+    margin: 0;
+    top: 189px;
+    left: 50.9%;
     min-width: 117px;
     max-width: 300px;
-    margin-left: 95px;
-    margin-top: 189px;
   }
 
   @media (max-width: $tablet-width) {
