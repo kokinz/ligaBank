@@ -150,7 +150,7 @@
 
     @media (max-width: $tablet-width) {
       background-image: url(../../img/piggybank-mobile.png);
-      background-position: left calc(85% + 33px) bottom 151px;
+      background-position: left calc(85% + 33px) top 43px;
     }
   }
 
@@ -261,7 +261,7 @@
   }
 
   @media (max-width: $tablet-width) {
-    width: 100%;
+    width: 89%;
     font-size: 16px;
     line-height: 22px;
 
