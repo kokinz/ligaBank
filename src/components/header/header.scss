@@ -111,6 +111,7 @@
 .header__list {
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 22px;
 
   @media (max-width: $desktop-width) {
     width: 90%;
@@ -118,6 +119,7 @@
 
   @media (max-width: $tablet-width) {
     display: none;
+    padding-bottom: 0;
   }
 
   &--menu {
@@ -136,7 +138,6 @@
 .header__item {
   margin-right: 24px;
   padding-top: 37px;
-  margin-bottom: 30px;
 
   @media (max-width: $max-width) {
     margin-right: 15px;
@@ -145,7 +146,6 @@
   @media (max-width: $desktop-width) {
     padding-top: 30px;
     margin-right: 4.5%;
-    margin-bottom: 15px;
   }
 
   @media (max-width: $tablet-width) {
