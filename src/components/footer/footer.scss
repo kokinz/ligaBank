@@ -4,7 +4,6 @@
 
 .footer__wrapper {
   display: flex;
-  justify-content: space-between;
   position: relative;
 
   min-height: 224px;
@@ -295,6 +294,7 @@
 }
 
 .footer__social {
+  position: absolute;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -302,14 +302,16 @@
   margin: 0;
   padding: 0;
   z-index: 2;
-  margin-top: 60px;
-  margin-left: 26px;
+  top: 60px;
+  right: 88px;
   min-width: 119px;
   min-height: 16px;
 
   list-style: none;
 
   @media (max-width: $max-width) {
+    position: static;
+    margin-top: 60px;
     margin-left: 5px;
   }
 
